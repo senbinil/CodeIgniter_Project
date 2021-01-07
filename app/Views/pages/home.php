@@ -50,6 +50,9 @@
             <div class="col-sm-4  news">
               <div class=" bg-dark text-white ">
                 <h4 align="center">News</h4>
+
+
+                <?php $sen=$msg[0]['msg']; echo $sen;?>
               </div>
             </div>
         </div>
@@ -71,7 +74,7 @@
               <!-- Main heading -->
   
               <hr>
-  
+
             
               <a href="about.php" class="btn btn-primary btn-md" >Read More</a>
             </div>

@@ -10,7 +10,7 @@ class Auth implements FilterInterface
     {
         if(!session()->get('logged_in'))
         {
-            return redirect()->to('home');
+            return redirect()->to('/home');
         }
     }
     public function after(RequestInterface $resquest,ResponseInterface $response,$arguments=null)

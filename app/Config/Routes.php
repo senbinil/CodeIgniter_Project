@@ -42,9 +42,13 @@ $routes->get('news', 'News::index');
 $routes->get('home', 'Pages::view');
 $routes->get('about', 'Pages::view/about');
 $routes->get('admin-login','Login::views/admin-login');
-$routes->get('dash' , 'Dashboard::index',['filter'=>'auth']);
+$routes->get('admin-home' , 'Dashboard::index',['filter'=>'auth']);
+$routes->get('admin-home/(:segment)' , 'Dashboard::adminView/$1',['filter'=>'auth']);
+$routes->match(['get', 'post'], 'dashboard/enroll', 'Dashboard::enroll',['filter'=>'auth']);
+$routes->match(['get', 'post'], 'dashboard/announce', 'Dashboard::announce',['filter'=>'auth']);
+$routes->match(['get', 'post'], 'dashboard/fee-collector/(:segment)', 'Dashboard::feeMod/$1',['filter'=>'auth']);
 $routes->match(['get', 'post'], 'login/auth', 'Login::auth');
-$routes->get( 'login/logout', 'Login::logout');
+$routes->get( 'logout', 'Login::logout');
 
 
 /**

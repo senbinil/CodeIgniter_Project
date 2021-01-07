@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>login</title>
-    <link href="asset/css/font-awesome.min.css" rel="stylesheet" >
-    <script src="asset/js/jquery.min.js"></script>
-    <script src="asset/js/bootstrap.min.js" ></script>
-    <link href="asset/css/bootstrap.css" rel="stylesheet" >
+    <link href="<?= base_url();?>/asset/css/font-awesome.min.css" rel="stylesheet" >
+    <script src="<?= base_url();?>/asset/js/jquery.min.js"></script>
+    <script src="<?= base_url();?>/asset/js/bootstrap.min.js" ></script>
+    <link href="<?= base_url();?>/asset/css/bootstrap.css" rel="stylesheet" >
     
-    <link rel="stylesheet" href="asset/css/admin-log.css">
+    <link rel="stylesheet" href="<?= base_url();?>/asset/css/admin-log.css">
 </head>
 <body>
 

@@ -1,5 +1,6 @@
 <?php namespace App\Controllers;
 
+use App\Models\HomeModel;
 use CodeIgniter\Controller;
 
 class Pages extends Controller
@@ -22,8 +23,11 @@ class Pages extends Controller
         }
 
        if($page=='home'){
+           $model=new HomeModel();
+           $data['msg']=$model->select('msg')->orderby('msg_id','DESC')->findall();
+        //    var_dump($data['msg'][0]['msg']);
         echo view('templates/header');
-        echo view('pages/'.$page);
+        echo view('pages/'.$page,$data);
         echo view('templates/particle');
         echo view('templates/footer');
        }
