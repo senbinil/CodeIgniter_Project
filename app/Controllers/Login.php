@@ -37,7 +37,9 @@ class Login extends BaseController
                 $ses_data=[
                     'user_id' =>$data['username'],
                     'email_id' =>$data['email_id'],
-                    'logged_in'=>TRUE
+                    'logged_in'=>TRUE,
+                    'log_time'=>(int)time(),
+                    'log_exp'=>(int)time()+(30*60)
                 ];
                 $session->set($ses_data);
                 return redirect()->to('/admin-home');

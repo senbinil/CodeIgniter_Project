@@ -21,6 +21,15 @@ connectParticles: false
 });
 };
 
+$(document).ready(function () {
+  $(".example").smartmarquee({
 
+    duration:2000,
+            loop:true,
+            interval:1000,
+            axis:"vertical",
+
+  });
+});
 
 </script>

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +30,6 @@ body{
          body{
          font-family: 'Montserrat',sans-serif;
          width: 100%;
-         color: white !important;
   
      }
   
@@ -51,9 +49,33 @@ body{
          text-decoration: none !important;
          color: white !important;
      }
+     .vl
+        {
+            border-left:6px solid black;
+            height: 200px;
+        }
+        @media only screen and (max-width:600px){
+            .vl{
+                display: none;
+            }
+        }
+        body{
+            font-family: 'Montserrat',sans-serif;
+        }
+       
+       #step-2{
+           display: none;
+       }
+       .panel{
+           text-align: center;
+           margin: auto;
+       }
+       .panel-heading{
+           margin-bottom: 30px;
+       }
     </style>
 </head>
-<body class="bg-primary">
+<body >
  
     <header class="container-fluid">
         <span class="hash"><i class="fa fa-briefcase" aria-hidden="true"></i>
@@ -61,7 +83,7 @@ body{
     </header>
 
      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-         <a  class="navbar-brand">Welcome back <span class="font-weight-bold text-capitalize"><?= $username;?></span></a>
+         <!-- <a  class="navbar-brand">Welcome back <span class="font-weight-bold text-capitalize"></span></a> -->
         
             <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fas fa-align-justify"></i>
@@ -79,53 +101,64 @@ body{
            
         </div>
     </nav>
-<br>
-<div class="container ">
-<fieldset>
-    <legend class="text-dark mb-4"><div class="head my-4">
-    <h3 class="bg-info text-white text-center">
-        Student Corner
-    </h3>
-</div></legend>
-    <ol>
-        <div class="row">
-        <li class="col-sm-5"><a href="admin-home/student-enroll">Student Enrollment</a></li>
-       <li class="col-sm-3"><a href="admin-home/message-center">Message Center</a>
-       </li>
-        <li class="col-sm-3"><a href="/admin-home/feeupdate">Fee Collector</a></li>
-    </div>
-</ol>
-</fieldset>
 
-<fieldset style="margin-top: 100px;">
-    <legend>
-    <div class="head my-4">
-    <h3 class="bg-info text-white text-center">
-        Staff Corner
-    </h3></div>
-    </legend>
-    <ol>
-        <div class="row">
-        <li class="col-sm-3"><a href="staffenroll.php">Staff Enrollment</a></li>
-        <li class="col-sm-3"><a href="staffsal.php">Salary Update</a></li>
-    </div>
-    </ol>
-</fieldset>
-<div class="head my-4">
-    <h3 class="bg-info text-white text-center">
-        Advance
-    </h3>
-</div>
-    <ol>
-        <div class="row">
-        <li class="col-sm-3"><a href="admin-home/global-search"> Global Search</a></li>
-        <li class="col-sm-3"><a href="bulletin.php">Bulletin update</a></li>
-        <li class="col-sm-3"><a href="suginbox.php">Suggestion Box</a></li>
 
-    </div>
-    </ol>
+<div class="container">
+         <form role="form">
+        <div class="panel setup-content my-4" id="step-1">
+            <div class="panel-heading">
+                 <h3 class="panel-title">Student</h3>
+            </div>
+            <div class="panel-body ">
+                <div class="form-group">
+                    <div class="d-flex justify-content-center">
+                    <input type="text" required="required" class="form-control text-center col-sm-4" placeholder="Admission ID" />
 
-</div>
-  
+                    </div>
+                </div>
+        
+                <button class="btn btn-primary " onclick="myFn()" type="button">Search</button>
+            </div>
+        </div>
+        
+        <div class="panel  setup-content my-4 " id="step-2">
+            <div class="panel-heading">
+                 <h3 class="panel-title">Employee</h3>
+            </div>
+            <div class="panel-body ">
+                <div class="form-group">
+                    <div class="d-flex justify-content-center">
+                    <input type="text" required="required" class="form-control text-center col-sm-4" placeholder="Employee ID" />
+
+                    </div>
+                </div>
+        
+                <button class="btn btn-primary " onclick="myFn()" type="button">Search</button>
+            </div>
+        </div>
+        <hr>
+         </form>
+    
+
+        
+ </div>
+
+ <script>
+    function myFn() {
+        var y = document.getElementById("step-1");
+
+  var x = document.getElementById("step-2");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+    y.style.display = "none";
+
+  } else {
+    x.style.display = "none";
+    y.style.display = "block";
+
+  }
+}
+
+ </script>
 </body>
 </html>

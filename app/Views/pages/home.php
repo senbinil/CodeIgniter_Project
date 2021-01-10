@@ -1,9 +1,11 @@
 
+    <script src="/asset/js/jquery.smartmarquee.js"></script>
+
           <header class=" container-fluid extra   my-4">
             <div class="text-block jumbotron-fluid bg-transparent ">
               <span class="  display-3 ">College Of Applied Science, Perissery</span>
               <p class="lead mb-5 text-white-50">
-              <a href="about.php" class="btn btn-dark btn-lg">Read More</a>
+              <a href="about" class="btn btn-dark btn-lg">Read More</a>
             </p>
             </div>
             <canvas class="background"></canvas>
@@ -47,14 +49,28 @@
     
               </section>
             </div>
-            <div class="col-sm-4  news">
-              <div class=" bg-dark text-white ">
-                <h4 align="center">News</h4>
+            <div class="col-sm-4 news border bg-white border ">
+          <div class=" bg-dark text-white ">
+            <h4 align="center">News</h4>
+          </div>
 
 
-                <?php $sen=$msg[0]['msg']; echo $sen;?>
-              </div>
-            </div>
+          <div class="smartmarquee example   " style=" height:300px;">
+    
+          <ul class="container text-dark" style="overflow: auto; ">
+          <?php
+            if (isset($msg)) {
+              // output data of each row
+              for($i=0;$i<count($msg) ;$i++)
+              echo  '<li class="font-weight-bold">'.$msg[$i]['msg'].'</li>';
+            } else {
+              echo "0 results";
+          }
+          ?>
+          </ul>
+          </div>
+
+        </div>
         </div>
         
       
@@ -142,4 +158,3 @@
          </section>
         </div>
     </div>
-        

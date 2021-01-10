@@ -1,36 +1,3 @@
-<!-- <div data-ride="carousel" id="carex" class=" headsec carousel carousel-fade slide">
-    <ol class="carousel-indicators">
-        <li class="active" data-target="#carex"data-slide-to="0"></li>
-        <li data-target="#carex" data-ride="1"></li>
-        <!--<li data-target="#carex" data-ride="2"></li>-->
-    <!-- </ol>
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-           <div class="content bg-primary w-100 text-white d-block" style="height:200px;">
-               <p class="lead text-center" style="font-size:60px; padding-top: 30px;" ><img src="img/Nav_logo.gif" alt="CASP"> </p>
-           </div>
-        </div>
-        <div class="carousel-item">
-            <div class="content bg-danger w-100 text-white d-block" style="height:200px;">
-                <p class="lead text-center" style="font-size:60px; padding-top: 30px;" >Welcome to our College </p>
-            </div>
-        </div>
-    </div>
-    <a href="#carex" role="button" data-slide="prev" class="carousel-control-prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a href="#carex" role="button" data-slide="next" class="carousel-control-next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span> -->
-  
-
-
-
-
-
-
-
 
   <div class="container " style="margin-top:100px;">
       <div class="row">
@@ -39,17 +6,8 @@
               <p class="text-justify">The College of  Applied Science Perissery established in 2015, is affiliated to the University of Kerala and is  managed by the  Institute for Human Resources Development, Thiruvananthapuram, a Government of Kerala undertaking popularly known as the IHRD in the Kerala higher education sector.The college has a modest beginning with two First Degree Programmes in English and Commerce and two Career-related First Degree Programmes in Computer Application and Computer Science.  College of Applied Science,
                  Perissery is an affiliated institution of the University of Kerala and is managed by IHRD, a Govt. of Kerala institution.
                   </p>
-                  
-                  
-                  
-                  
+            
                   <br>
-
-
-
-
-
-
                   <img src="asset/img/map.PNG" width="700px" style="overflow: hidden;" class="img-fluid mb-4" class="mb-4 col-sm-8" alt=""><br>
                   Courses  Affiliated to University of Kerala
                   <ul class="my-3">

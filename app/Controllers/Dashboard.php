@@ -26,6 +26,8 @@ class Dashboard extends Controller
                                     break;
             case "feeupdate": echo view('dashboard/fee-collector');
                                     break;
+            case "global-search":echo view('dashboard/global-search');
+                                break;
             default:$session = session();
                                 // echo "Welcome back, ".$session->get('user_id');
                                 $data['username']=$session->get('user_id');
