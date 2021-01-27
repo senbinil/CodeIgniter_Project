@@ -39,15 +39,17 @@ $routes->get('news', 'News::index');
 // $routes->get('(home,about)', 'Pages::view/$1');
 
 // $routes->get('pages','Pages::index');
-$routes->get('home', 'Pages::view');
-$routes->get('about', 'Pages::view/about');
-$routes->get('admin-login','Login::views/admin-login');
+$routes->get('/(:segment)', 'Pages::view/$1');
+$routes->get('/login/(:segment)','Login::views/$1');
+$routes->get('/register/(:segment)','Register::index');
+
 $routes->get('admin-home' , 'Dashboard::index',['filter'=>'auth']);
 $routes->get('admin-home/(:segment)' , 'Dashboard::adminView/$1',['filter'=>'auth']);
 $routes->match(['get', 'post'], 'dashboard/enroll', 'Dashboard::enroll',['filter'=>'auth']);
 $routes->match(['get', 'post'], 'dashboard/announce', 'Dashboard::announce',['filter'=>'auth']);
 $routes->match(['get', 'post'], 'dashboard/fee-collector/(:segment)', 'Dashboard::feeMod/$1',['filter'=>'auth']);
 $routes->match(['get', 'post'], 'login/auth', 'Login::auth');
+$routes->match(['get', 'post'], 'dashboard/Search/(:segment)', 'Dashboard::getDetails/$1',['filter'=>'auth']);
 $routes->get( 'logout', 'Login::logout');
 
 

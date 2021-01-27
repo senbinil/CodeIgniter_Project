@@ -147,7 +147,7 @@ class Dashboard extends Controller
                 }
                 catch(Exception $e)
                 {
-                    echo $this->request->getPost('mphone');
+                    // echo $this->request->getPost('mphone');
                 }
             }
             else
@@ -156,7 +156,22 @@ class Dashboard extends Controller
 
     }
             
+public function getDetails($cat){
 
+    if($cat=="student" && $this->request->getMethod()=='post')
+    {
+        $studModel=new Enrollment();
+        try{
+            $user=$studModel->where('admin_no',$this->request->getPost('student_id'))->first();
+            echo view('dashboard/global-search',$user);
+        }
+        catch(Exception $e)
+        {
+            echo $e;
+        }
+    }
+
+}
 
 }
 

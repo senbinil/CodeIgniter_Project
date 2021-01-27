@@ -27,15 +27,33 @@ class Pages extends Controller
            $data['msg']=$model->select('msg')->orderby('msg_id','DESC')->findall();
         //    var_dump($data['msg'][0]['msg']);
         echo view('templates/header');
+        echo view('resources/home-style');
+        echo view('templates/body');
         echo view('pages/'.$page,$data);
         echo view('templates/particle');
         echo view('templates/footer');
        }
         else{
-            echo view('templates/header');
-            echo view('pages/'.$page);
-         //    echo view('templates/particle');
-            echo view('templates/footer');
+
+            switch($page)
+            {
+                case "about":   echo view('templates/header');
+
+                                echo view('templates/body');
+
+                                echo view('pages/'.$page);
+                     //    echo view('templates/particle');
+                                echo view('templates/footer');
+                                break;
+                case "more":echo view('templates/header');
+                            echo view('resources/more-style');
+                            echo view('templates/body');
+                            echo view('pages/more');
+                            echo view('templates/footer');
+                            break;
+                default:redirect()->to('/home');
+            }
+     
         }
       
     }

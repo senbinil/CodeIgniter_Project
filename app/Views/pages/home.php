@@ -1,7 +1,6 @@
 
     <script src="/asset/js/jquery.smartmarquee.js"></script>
-
-          <header class=" container-fluid extra   my-4">
+          <header class=" container-fluid extra  " style="margin-top: 50px;">
             <div class="text-block jumbotron-fluid bg-transparent ">
               <span class="  display-3 ">College Of Applied Science, Perissery</span>
               <p class="lead mb-5 text-white-50">
@@ -49,15 +48,15 @@
     
               </section>
             </div>
-            <div class="col-sm-4 news border bg-white border ">
+            <div class="col-sm-4 news border bg-white border " style="overflow: hidden;">
           <div class=" bg-dark text-white ">
             <h4 align="center">News</h4>
           </div>
 
 
-          <div class="smartmarquee example   " style=" height:300px;">
+          <div class="smartmarquee example bg-white ">
     
-          <ul class="container text-dark" style="overflow: auto; ">
+          <ul class="container news-content text-dark px-4" style="overflow:hidden;">
           <?php
             if (isset($msg)) {
               // output data of each row
@@ -150,8 +149,9 @@
               </div>
               <!--/Third row-->
               </div>
-              <div class="col-md-6">
-                <img src="asset/img/gg.jpg" class="img-fluid z-depth-1-half" alt="">
+              
+              <div class="col-md-6 ">
+                <img src="asset/img/gg.jpg" class="img-fluid hatpic"  alt="">
               </div>
            </div>
            

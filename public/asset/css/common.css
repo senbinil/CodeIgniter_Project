@@ -1,0 +1,74 @@
+@font-face {
+    font-family: Montserrat;
+    src: url(/asset/fonts/Montserrat-Regular.ttf);
+  
+ }
+ @font-face {
+  font-family: Montserrat;
+  src: url(/asset/fonts/Montserrat-SemiBold.ttf);
+  font-weight: 600;
+
+}
+@font-face {
+  font-family: Montserrat;
+  src: url(/asset/fonts/Montserrat-Bold.ttf);
+  font-weight: bold;
+
+}
+
+
+     /* body {
+     /* height:100%; ADD this */
+     /* position: relative; */
+      */
+
+ /* } */
+     body {
+   font-family: 'Montserrat',sans-serif;
+   /* Margin bottom by footer height */
+   min-height: 100vh;
+ }
+ html{
+  position:relative;
+  min-height:100%;
+}
+
+.footer {
+position: relative;
+bottom: 0;
+width: 100%;
+height:fit-content;
+}
+ 
+ .social-links a {
+   width: 40px;
+   height: 40px;
+   border-radius: 50%;
+   padding-top: 10px;
+   font-size: 18px;
+   font-size: 1.2em;
+   display: inline-block;
+   margin: 0 5px;
+   text-align: center;
+   color: white;
+   line-height: normal; }
+   .social-links a.facebook {
+     background-color: #204385; }
+   .social-links a.twitter {
+     background-color: #2aa9e0; }
+   .social-links a.google-plus {
+     background-color: #d3492c; }
+   .social-links a.pinterest {
+     background-color: #ca2128; }
+ 
+     nav ul li{
+         font-weight: normal;
+         font-size: large;
+         
+     }
+    
+     .navbar-brand{
+         font-size: x-large;
+         font-weight: 500;
+     }
+  

@@ -17,7 +17,12 @@ class Login extends BaseController
         switch($loc){
             case 'admin-login':echo view('login/admin-login');
                                 break;
-
+            case 'guest-login':echo view('templates/header');
+                                echo view('resources/guest-login-style');
+                                echo view('templates/body');
+                                echo view('login/guest-login');
+                                echo view('templates/footer');
+                                break;
             default:echo view('welcome-message');
         }
     }

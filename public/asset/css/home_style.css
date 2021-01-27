@@ -6,11 +6,14 @@
    .smartmarquee{
     position: absolute;
     overflow: hidden;
+    /* height:300px; */
     
 }
-   .extra{
+
+.extra{
      position: relative;
      height: 500px;
+     
    }
    .text-block{
      position: absolute;
@@ -34,6 +37,20 @@ margin-top: 30px;
 .space{
   display: none;
 }
+.hatpic{
+  display: flex;
+  align-items: center;
+}
+}
+@media only screen and (max-width:900px) {
+  .hatpic{
+display: none;    
+  }
+ }
+ @media only screen and (max-width:756px) {
+  .hatpic{
+display: block;    
+  }
  }
  .background canvas {
 display: block;

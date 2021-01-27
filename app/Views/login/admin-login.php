@@ -23,7 +23,7 @@
             <div class="collapse navbar-collapse " id="navbarSupportedContent">
                 <ul class="nav navbar-nav  ml-auto">
                     <li class="nav-item active   mx-2 my-1">
-                       <a class="nav-link " href="home"> <span><i class="fa fa-home"></i></span> Home</a>
+                       <a class="nav-link " href="/home"> <span><i class="fa fa-home"></i></span> Home</a>
                     </li>
                     <li class="nav-item  active  mx-2 my-1">
                         <a class="nav-link " href="exlog.php">Student login</a>

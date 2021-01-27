@@ -63,7 +63,7 @@ body{
             font-family: 'Montserrat',sans-serif;
         }
        
-       #step-2{
+       /* #step-2{
            display: none;
        }
        .panel{
@@ -72,7 +72,12 @@ body{
        }
        .panel-heading{
            margin-bottom: 30px;
-       }
+       } */
+       input[type="text"]::placeholder {  
+                  
+                  /* Firefox, Chrome, Opera */ 
+                  text-align: right; 
+              } 
     </style>
 </head>
 <body >
@@ -82,8 +87,7 @@ body{
         </span>Dashboard
     </header>
 
-     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-         <!-- <a  class="navbar-brand">Welcome back <span class="font-weight-bold text-capitalize"></span></a> -->
+     <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
         
             <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fas fa-align-justify"></i>
@@ -105,19 +109,23 @@ body{
 
 <div class="container">
          <form role="form">
-        <div class="panel setup-content my-4" id="step-1">
-            <div class="panel-heading">
+        <div class="panel  setup-content my-4" id="step-1">
+            <div class="panel-heading d-flex justify-content-center">
                  <h3 class="panel-title">Student</h3>
+                
             </div>
             <div class="panel-body ">
                 <div class="form-group">
                     <div class="d-flex justify-content-center">
                     <input type="text" required="required" class="form-control text-center col-sm-4" placeholder="Admission ID" />
-
                     </div>
                 </div>
         
-                <button class="btn btn-primary " onclick="myFn()" type="button">Search</button>
+                <button class="btn btn-primary btn-sm " type="button">Search</button>
+
+            </div>
+            <div class="mt-4  d-block float-right">
+            <a onclick="myFn()" class="btn btn-light btn-sm" >Employee ?</a>
             </div>
         </div>
         
@@ -133,10 +141,12 @@ body{
                     </div>
                 </div>
         
-                <button class="btn btn-primary " onclick="myFn()" type="button">Search</button>
+                <button class="btn btn-primary btn-sm"  type="button">Search</button>
+            </div>
+            <div class="mt-4  d-block float-right">
+            <a onclick="myFn()" class="btn btn-light btn-sm">Student ?</a>
             </div>
         </div>
-        <hr>
          </form>
     
 
@@ -158,7 +168,123 @@ body{
 
   }
 }
+ </script> -->
+ <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title font-weight-bold"  id="exampleModalLongTitle"><?php if(isset($admin_no)) echo "Student Found : $admin_no"; else echo "nothing ";  ?></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
 
- </script>
+      <div class="modal-body">
+
+        <form action="">
+            <div class="row">
+            <div class="col-sm-3">
+            <label for="Fname" class="col-form-label">First Name</label>
+            </div>
+            <div class="col">
+            <input type="text" class="form-control" value="<?=$fname?>" placeholder="First Name" disabled >
+            </div>
+            </div>
+
+            <div class="row my-2">
+            <div class="col-sm-3">
+            <label for="lnane" class="col-form-label">Last Name</label>
+            </div>
+            <div class="col">
+            <input type="text" class="form-control" value="<?=$lname?>" placeholder="Last Name" disabled >
+            </div>
+            </div>
+            
+            <div class="row my-2">
+            <div class="col-sm-3">
+            <label for="DOB" class="col-form-label">Date Of Birth</label>
+            </div>
+            <div class="col-sm-4">
+            <input type="text" class="form-control" value="<?=$dob?>" placeholder="DOB" disabled >
+            </div>
+            <div class="col-sm-3">
+            <label for="Blood" class="col-form-label">Blood Group</label>
+            </div>
+            <div class="col">
+            <input type="text" class="form-control" placeholder="Blood Group" value="<?=$blood_group?>">
+            </div>
+            </div>  
+
+            <div class="row my-2">
+            <div class="col-sm-2">
+            <label for="DOB" class="col-form-label">Address</label>
+            </div>
+            <div class="col">
+            <textarea type="text" class="form-control" disabled ><?=$address?></textarea>
+            </div>
+            </div>
+
+
+            <div class="row my-2">
+            <div class="col-sm-2">
+            <label for="state" class="col-form-label">State</label>
+            </div>
+            <div class="col-sm-3">
+            <input type="text" class="form-control" value="<?=$state?>" disabled>
+            </div>
+            <div class="col-sm-2">
+            <label for="City" class="col-form-label">City</label>
+            </div>
+            <div class="col">
+            <input type="text" class="form-control" value="<?=$city?>" disabled>
+            </div>
+            </div>
+
+            <div class="row my-2">
+            <div class="col-sm-2">
+            <label for="Code" class="col-form-label">Zip Code</label>
+            </div>
+            <div class="col-sm-3">
+            <input type="text" class="form-control" value="<?=$zip_code?>" disabled>
+            </div>
+            <div class="col-sm-2">
+            <label for="gender" class="col-form-label">Gender</label>
+            </div>
+            <div class="col">
+            <input type="text" class="form-control" value="<?=$gender?>" disabled>
+            </div>
+            </div>
+
+        </form>
+
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+
+$(window).on('load',function(){
+     // delay in milliseconds
+    
+    setTimeout(function(){
+        $('#myModal').modal('show');
+    });
+});
+
+function onClk()
+{
+    window.location.replace("/admin-home");
+
+}
+</script>
 </body>
 </html>
