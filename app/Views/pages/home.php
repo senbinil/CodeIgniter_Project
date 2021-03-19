@@ -12,10 +12,10 @@
         
     
     
-          <div class="container container-fluid-sm cont">
-          <div class="row bg-transparent p-1">
+          <div class="container container-fluid-sm cont" >
+          <div class="row bg-transparent p-1" >
             
-            <div class="col-sm-8 card ">
+            <div class="col-sm-8 card  py-4">
               <section>
                 <h2>Upcoming Events</h2><br>
                 <hr>
@@ -48,20 +48,20 @@
     
               </section>
             </div>
-            <div class="col-sm-4 news border bg-white border " style="overflow: hidden;">
+            <div class="col-sm-4 news border bg-primary border py-4 " style="overflow: hidden;">
           <div class=" bg-dark text-white ">
             <h4 align="center">News</h4>
           </div>
 
 
-          <div class="smartmarquee example bg-white ">
+          <div class="smartmarquee example  ">
     
-          <ul class="container news-content text-dark px-4" style="overflow:hidden;">
+          <ul class="container news-content bg-primary text-dark px-4" style="overflow:hidden;">
           <?php
             if (isset($msg)) {
               // output data of each row
               for($i=0;$i<count($msg) ;$i++)
-              echo  '<li class="font-weight-bold">'.$msg[$i]['msg'].'</li>';
+              echo  '<li class="font-weight-bold card-body border bg-light">'.$msg[$i]['msg'].'</li>';
             } else {
               echo "0 results";
           }

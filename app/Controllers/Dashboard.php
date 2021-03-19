@@ -4,6 +4,10 @@ use CodeIgniter\Controller;
 
 use App\Models\Enrollment;
 use App\Models\FeePay;
+use App\Models\Designation;
+use App\Models\StaffEnrollment;
+use App\Models\Department;
+
 use Exception;
 
 class Dashboard extends Controller
@@ -18,6 +22,10 @@ class Dashboard extends Controller
 
     public function adminView($page)
     {
+        $designation=new Designation();
+        $department=new Department();
+        $desig['contentx']=$department->select(['department_id','department_name'])->findAll();
+        $desig['content']=$designation->select(['pos_id','pos_name'])->findAll();
         switch($page)
         {
             case "student-enroll": echo view('dashboard/student-enrollment');
@@ -27,6 +35,8 @@ class Dashboard extends Controller
             case "feeupdate": echo view('dashboard/fee-collector');
                                     break;
             case "global-search":echo view('dashboard/global-search');
+                                break;
+            case "staff-enroll":echo view('dashboard/staff-enrollment',$desig);
                                 break;
             default:$session = session();
                                 // echo "Welcome back, ".$session->get('user_id');
@@ -85,6 +95,52 @@ class Dashboard extends Controller
         echo view('dashboard/student-enrollment');
     }
 
+    public function staffEnroll()
+    {
+        $session=session();
+        $staffModel=new StaffEnrollment();
+        if($this->request->getMethod()=='post')
+        {
+            try
+            {
+                $staffModel->save([
+                    'frm_no'=>$this->request->getPost('frm_no'),
+                    'apply_date'=>$this->request->getPost('app_date'),
+                    'emp_name'=>$this->request->getPost('emp_name'),
+                    'dob'=>$this->request->getPost('dob'),
+                    'gender'=>$this->request->getPost('gen'),
+                    'nationality'=>$this->request->getPost('nation'),
+                    'cat'=>$this->request->getPost('cat'),
+                    'martial'=>$this->request->getPost('martial'),
+                    'exp'=>$this->request->getPost('exp'),
+                    'mobile'=>$this->request->getPost('mob'),
+                    'email'=>$this->request->getPost('email'),
+                    'blod'=>$this->request->getPost('blod'),
+                    'caddress'=>$this->request->getPost('caddress'),
+                    'paddress'=>$this->request->getPost('paddress'),
+                    'education'=>$this->request->getPost('edu'),
+                    'spec'=>$this->request->getPost('spec'),
+                    'emp_type'=>$this->request->getPost('emp_type'),
+                    'department'=>$this->request->getPost('department'),
+                    'desig'=>$this->request->getPost('desig'),
+                    'j_date'=>$this->request->getPost('j_date'),
+                    'acc_no'=>$this->request->getPost('acc_no'),
+                    'bank_name'=>$this->request->getPost('bank_name'),
+                    'ifsc'=>$this->request->getPost('ifsc'),
+                ]);
+                $idval=$this->request->getPost('frm_no');
+                $acc_no=$this->request->getPost('acc_no');
+                $staff_id=$staffModel->select('emp_id')->where('frm_no',$idval)->first();
+                  $emp_id=$staff_id['emp_id'];
+                  $session->setFlashdata('emp_id',$emp_id);
+                 return redirect()->to('/admin-home/staff-enroll');
+
+            }
+            catch(Exception $e)
+            {
+                echo $e;            }
+        }
+    }
     public function announce()
     {   
         $session=session();
@@ -163,13 +219,28 @@ public function getDetails($cat){
         $studModel=new Enrollment();
         try{
             $user=$studModel->where('admin_no',$this->request->getPost('student_id'))->first();
-            echo view('dashboard/global-search',$user);
+            if(isset($user))
+            echo view('dashboard/global-search-student',$user);
+            else
+             return redirect()->to('/admin-home');
         }
         catch(Exception $e)
         {
             echo $e;
         }
     }
+    elseif($cat=="staff" && $this->request->getMethod()=='post')
+    {
+        $stud=new StaffEnrollment();
+        $user=$stud->select()->where('emp_id',$this->request->getPost('emp_id'))->first();
+        if(isset($user))
+        echo view('dashboard/global-search-staff',$user);
+        else
+            return redirect()->to('/admin-home');
+
+    }
+    else
+        return redirect()->to('/admin-home');
 
 }
 

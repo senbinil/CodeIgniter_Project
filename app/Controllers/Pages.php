@@ -51,6 +51,7 @@ class Pages extends Controller
                             echo view('pages/more');
                             echo view('templates/footer');
                             break;
+                case "admin-login":
                 default:redirect()->to('/home');
             }
      

@@ -53,7 +53,7 @@ body{
      }
     </style>
 </head>
-<bod>
+<body>
  
 
 
@@ -274,11 +274,11 @@ body{
         <div class="card">
         <div class="card-body bg-danger text-white">
              <h5 class="card-title"><i class="fa fa-rocket"></i>  Fast Track</h5><hr class="bg-white">
-            <form action="" class="form mx-4" method="post">
+            <form action="dashboard/Search/staff" class="form mx-4" method="post">
                 <div class="row">
                     <label for="adminno" class="col-form-label">Employee </label>
                     <div class="form-group col-sm-4">
-                        <input type="text" class="form-control" class="emp_id" placeholder="ID">
+                        <input type="text" class="form-control" name="emp_id" class="emp_id" placeholder="ID">
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Search" class="form-control btn btn-dark btn-sm">
@@ -387,7 +387,7 @@ body{
                 <div class="card-body bg-light">
                     <div class="row">
                         <div class="col-md-3 col-xs-6">
-                            <a href="#" class="nav-link">Enrollment</a>
+                            <a href="admin-home/staff-enroll" class="nav-link">Enrollment</a>
                         </div>
                         <div class="col-md-3 col-xs-6">
                             <a href="#" class="nav-link">Salary</a>

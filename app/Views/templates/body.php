@@ -20,11 +20,18 @@
                       login
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="exlog.php">Student</a>
-                      <a class="dropdown-item" href="exlog.php">Staff</a>
+                      <a class="dropdown-item" href="/login/student-login">Student</a>
+                      <a class="dropdown-item" href="/login/staff-login">Staff</a>
                       <a href="/login/guest-login" class="dropdown-item">Guest</a>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="/login/admin-login">College</a>
+                    </div>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle"  id="passrecovery" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Password Recovery</a>
+                    <div class="dropdown-menu" aria-labelledby="passrecovery">
+                    <a href="/precovery/student-recovery" class="dropdown-item">Student</a>
+                      <a href="/precovery/staff-recovery" class="dropdown-item">Staff</a>
                     </div>
                   </li>
                   <li class="nav-item dropdown">

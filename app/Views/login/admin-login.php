@@ -41,13 +41,13 @@
         <div class="container-login10">
             <div class="wrap-login10 row">
             <div class="login10-pic  col-md-6 d-block ">
-                <!-- <img src="asset/img/admin-log.jpg" alt="IMG"> -->
+                <img src="/asset/img/admin-log.jpg" alt="IMG">
             </div>
-            <form class="login10-form" action="login/auth" method="POST">
+            <form class="login10-form" action="/login/auth" method="POST">
                 <span class="login10-form-title">College login</span>
         
                 <div class="wrap-input10">
-                    <input type="text"   class="input10" name="admin_username" autocomplete="off" placeholder="Username" id="">
+                    <input type="text"   class="input10 form-control" name="admin_username" required autocomplete="off" placeholder="Username" id="">
                 <span class="focus-input10"></span>
                 <span class="symbol-input10">
                     <i class="fa fa-user" aria-hidden="false"></i>
@@ -55,7 +55,7 @@
                 </div>
         
                 <div class="wrap-input10">
-                    <input type="password"  class="input10" name="admin_password" placeholder="Password" id="">
+                    <input type="password"  class="input10 form-control" name="admin_password" required  placeholder="Password" id="">
                     <span class="focus-input10"></span>
                     <span class="symbol-input10">
                         <i class="fa fa-lock" aria-hidden="false"></i>
