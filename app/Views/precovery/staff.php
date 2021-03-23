@@ -25,8 +25,9 @@
 
     </style>
 </head>
-<body class="bg-dark">
-<header class="text-center bg-dark text-white py-5">
+<body class="" style="background: rgb(2,0,36); background: linear-gradient(248deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);">
+<header class="text-center bg-white text-white py-5" style="background: rgb(2,0,36);
+background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);">
         <h1>Password Recovery</h1>
     </header>
     <nav class="navbar mb-4 navbar-expand-lg navbar-light bg-light">
@@ -86,7 +87,7 @@ Why  i am on this page ?</h5><br>
     </nav>
 
 <div id="wrapper" style="height:100vh; padding-top:100px;">
-    <div class="container   my-4 p-4  bg-white" id="step1">
+    <div class="container   my-4 p-4  text-dark bg-light" id="step1">
         <h3>Step 1:</h3>
         <form action=  method="POST">
         <div class="row">
@@ -103,7 +104,7 @@ Why  i am on this page ?</h5><br>
         </form>
         <span class="mt-5">&nbsp;</span>
     </div>
-    <div class="container step2  p-4 text-white bg-primary" style="margin-top:90px;">
+    <div class="container step2  p-4 text-dark bg-light" style="margin-top:90px;">
         <h3>Step 2:</h3>
         <form action="setpassword.php" method="POST">
             <div class="row">

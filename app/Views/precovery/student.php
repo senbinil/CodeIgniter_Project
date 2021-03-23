@@ -20,13 +20,17 @@
      select,input{
          text-align: center;
      }
+     a{
+       color:white !important;
+     }
      
     
 
     </style>
 </head>
-<body class="bg-dark">
-<header class="text-center bg-dark text-white py-5">
+<body style="background-image: linear-gradient( 65.9deg,  rgba(85,228,224,1) 5.5%, rgba(75,68,224,0.74) 54.2%, rgba(64,198,238,1) 55.2%, rgba(177,36,224,1) 98.4% );">
+<header class="text-center text-white py-5" tyle="background: rgb(9,9,121);
+background: linear-gradient(248deg, rgba(9,9,121,1) 35%, rgba(4,121,196,1) 38%);">
         <h1>Password Recovery</h1>
     </header>
     <nav class="navbar mb-4 navbar-expand-lg navbar-light bg-light">
@@ -103,7 +107,7 @@ Why  i am on this page ?</h5><br>
         </form>
         <span class="mt-5">&nbsp;</span>
     </div>
-    <div class="container step2  p-4 text-white bg-primary" style="margin-top:90px;">
+    <div class="container step2  p-4 text-dark bg-light" style="margin-top:90px;">
         <h3>Step 2:</h3>
         <form action="setpassword.php" method="POST">
             <div class="row">
@@ -123,7 +127,8 @@ Why  i am on this page ?</h5><br>
 
 
 
-    <footer class="footer  py-5 page-footer text-dark bg-light font-small pt-4">
+    <footer class="footer  py-5 page-footer text-light  font-small pt-4" style="background: rgb(9,9,121);
+background: linear-gradient(248deg, rgba(9,9,121,1) 35%, rgba(4,121,196,1) 38%);">
 
         <!-- Footer Links -->
         <div class="container-fluid text-center text-md-left">

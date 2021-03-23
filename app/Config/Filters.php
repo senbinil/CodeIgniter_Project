@@ -10,8 +10,9 @@ class Filters extends BaseConfig
 		'csrf'     => \CodeIgniter\Filters\CSRF::class,
 		'toolbar'  => \CodeIgniter\Filters\DebugToolbar::class,
 		'honeypot' => \CodeIgniter\Filters\Honeypot::class,
-		'auth'    => \App\Filters\Auth::class
-
+		'auth'    => \App\Filters\Auth::class,
+		'fauth'	   => \App\Filters\Facultyaccess::class,
+		'dauth'   =>\App\Filters\DefaultAuth::class
 		
 	];
 

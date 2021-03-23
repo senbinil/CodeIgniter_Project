@@ -212,7 +212,7 @@ body{
                             <a href="#" class="nav-link">Resources</a>
                         </div> 
                          <div class="col-md-3 col-xs-6">
-                            <a href="#" class="nav-link">Suggestion Inbox </a>
+                            <a href="/admin-home/suggestion-box" class="nav-link">Suggestion Inbox </a>
                         </div>
                     </div>
                 </div>
@@ -404,7 +404,6 @@ body{
         </div>
     </div>
 </section>
-
 <script src="<?=base_url()?>/asset/js/popper.min.js"></script>
 <script>
  $(document).ready(function() {

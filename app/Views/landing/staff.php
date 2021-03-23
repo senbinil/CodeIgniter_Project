@@ -91,8 +91,7 @@
           user_id:id
         },
         cache:false,
-        success:function(dataResult){
-            
+        success:function(dataResult){ 
             var time_dump=JSON.parse(dataResult);
             console.log(time_dump);
              for(i=0;i<time_dump[0].length;i++)

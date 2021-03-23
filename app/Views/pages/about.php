@@ -41,18 +41,48 @@
   </div>
           </div>
           <div class="col-sm-4">
+          <div class="wrapper">
              <h3 class="lead">Mail Us:</h3>
-             <form action="suggest.php" method="POST" class="form-group">
+            
                 <label for="email" class="col-form-label">Email Address:</label>
                 <div class="">
-                    <input type="email" name="emailid"  class="form-control" required autocomplete="off"  >
+                    <input type="email" name="emailid"  id="email_id" class="form-control" required autocomplete="off"  >
                 </div>
                 <label for="input">Message:</label>
-                <textarea name="msg" cols="30"  class="form-control" aria-autocomplete="false" rows="5" required></textarea>
-                <center><input class="btn btn-primary mt-3" type="submit" value="Submit"></center>
-             </form>
+                <textarea name="msg" cols="30"  id="message" class="form-control" aria-autocomplete="false" rows="5" required></textarea>
+                <center><button class="btn btn-primary mt-3" id="log">Submit</button></center>
+            
+             </div>
           </div>
       </div>
   </div>
 
 <hr>
+<script>
+$(document).ready(function(){
+    $('#log').on('click',function(){
+        var user=$('#email_id').val();
+        var msg=$('#message').val();
+        if(user!=="" && msg!=="")
+        {
+            $.ajax({
+                url:"/user/suggestion",
+                type:"POST",
+                data:{
+                    type:1,
+                    id:user,
+                    message:msg
+                },
+                cache:false,
+                success:function(dataResult){
+                var dataresult=JSON.parse(dataResult);
+                    if(dataresult.stat)
+                    $('.wrapper').html('<p class="display-4 text-danger float-right ">Suggestion submitted!</p>');
+                    else
+                    alert("Error");
+                }
+            });
+        }
+    });
+});
+</script>

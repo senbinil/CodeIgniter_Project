@@ -4,22 +4,17 @@
 
 
 <link href="<?= base_url();?>/asset/css/font-awesome.min.css" rel="stylesheet" >
-    <script src="<?= base_url();?>/asset/js/jquery.min.js"></script>
-    <script src="<?= base_url();?>/asset/js/bootstrap.min.js" ></script>
-    <link href="<?= base_url();?>/asset/css/bootstrap.css" rel="stylesheet" >
-    <link rel="stylesheet" href="/asset/css/common.css">
-
-
-
+<script src="<?= base_url();?>/asset/js/jquery.min.js"></script>
+<script src="<?= base_url();?>/asset/js/bootstrap.min.js" ></script>
+<link href="<?= base_url();?>/asset/css/bootstrap.css" rel="stylesheet" >
+<link rel="stylesheet" href="/asset/css/common.css">
 <meta charset="UTF-8">
-    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>login</title>
     <style>
-
     body{
-      background:#ff3d00
+      background-image: linear-gradient( 109.6deg,  rgba(62,161,219,1) 11.2%, rgba(93,52,236,1) 100.2% );
     }
 
         .container{
@@ -39,26 +34,14 @@
     img{
     border-radius: 10px;
     }
-
-
      </style>
-
      <?=view('templates/body');?>
-
-
-
-
-
 <div class="container">
       <div class="wrapper">
         <div class="content bg-light py-4  row">
           <div class="col-md-6  py-4">
               <img  src="/asset/img/penpaper.jpg"  class="img-fluid"  alt="Responsive image">
           </div>
-
-
-
-
           <div class="col-md-6  py-4 ">
             <h4 class=" text-center  py-2">Here You Go</h4>
             <hr>
@@ -90,8 +73,6 @@
         </div>
       </div>
     </div>
-
-
 <?=view('templates/footer')?>
 </body>
 </html>

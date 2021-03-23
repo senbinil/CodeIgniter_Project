@@ -36,7 +36,7 @@
               <hr>
               <div class="row alert alert-dark" role="alert">
                 <h5>Note:</h5>
-                <p class="text-danger mx-5"><?=$remark ?></p>
+                <p class="text-danger mx-5"><?=$remark?></p>
             </div>
             <hr>
               <div class="row ">
@@ -52,7 +52,7 @@
       <div class="col-md-4 mb-4">
         <div class="row">
           <div class="col-6 pr-0 mx-3">
-            <h4 class="display-4 text-right mb-0 count-up" data-from="0" data-to="42" data-time="2000"><?=$course_dump['no_sem']?></h4>
+            <h4 class="display-4 text-left mb-0 count-up" data-from="0" data-to="42" data-time="2000"><?=$semester?></h4>
           </div>
 
           <div class="col-md-6">
@@ -64,36 +64,23 @@
       <div class="col-md-4 mb-4">
         <div class="row">
           <div class="col-6 pr-0 mx-3">
-            <h4 class="display-4 text-right mb-0 count1"></h4>
+            <h4 class="display-4 text-left mb-0 " id="stat"></h4>
         </div>
 
           <div class="col-6">
-            <p class="text-uppercase font-weight-normal mb-1"></p>
+            <p class="text-uppercase font-weight-normal mb-1">Fee Status</p>
           </div>
         </div>
       </div>
-<?php
-// $sem=$row['semester'];
-// $adm=$row['admin_no'];
-// $sql="select * from feelog where admin_no=$adm and semester=$sem";
-// $result=mysqli_query($conn,$sql);
-// if(mysqli_num_rows($result)>0)
-// $payment=true;
-// else
-// $payment=false;
 
-
-?>
       <div class="col-md-4 mb-4">
         <div class="row">
           <div class="col-6 pr-0 mx-3">
-            <h4 class="display-4 text-right"><span class="d-flex justify-content-end"><span class="count2"><?php //if($payment)echo "Paid"; else
-            //echo "Pending";?></span> </span></h4>
+          <h4 class="display-4 text-left mb-0 "><?php if($semester<6) echo $semester+1; else echo "All Done!";?></h4>
           </div>
 
           <div class="col-6">
-            <p class="text-uppercase font-weight-normal mb-1">Fee</p>
-            <p class="mb-0"><i class="fa fa-smile fa-2x mb-0"></i></p>
+            <p class="text-uppercase font-weight-normal mb-1">Upcomming Semester</p>
           </div>
         </div>
       </div>
@@ -102,9 +89,13 @@
     </div>
 </div>
 <!-- Right Section  -->
-<div class="col-4">
+<div class="col-md-4 mt-sm-2">
+<div class="payment  bg-dark text-white">
+<h4 class="bg-primary text-center text-center py-2"> Payment Info</h4>
+<div class="row mx-4">
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim adipisci, delectus aperiam, laudantium repudiandae reiciendis accusamus esse, repellat odio non doloribus quasi optio magnam suscipit voluptates magni excepturi veniam. Sint.</div>
+</div>
+</div>
 </div>
 
 </div>
@@ -126,12 +117,34 @@ $(document).ready(function(){
         cache:false,
         success:function(dataResult){
             var time_dump=JSON.parse(dataResult);
+            
              for(i=0;i<time_dump[0].length;i++)
              {  
                 $("#time_machine_dump").append("<tr><th scope=\"row\">"+time_dump[0][i].time_jumpid+"</th>"+"<td class=\"timelog\">"+time_dump[0][i].timelog+"</td>"+"</tr>");
               }          
         }
       });
+    }
+  });
+  var id=$('#user_id').val();
+  var sem=<?=$semester?>;
+  $.ajax({
+    url:'/user/log_fetch',
+    type:'POST',
+    data:{
+      type:2,
+      id:id,
+      semester:sem
+    },
+    cache:false,
+    success:function(result){
+      console.log(result);
+      var stat=JSON.parse(result)
+      if(stat.stat)
+      $('#stat').append('Paid')
+      else
+      $('#stat').append('Unpaid')
+
     }
   });
 });

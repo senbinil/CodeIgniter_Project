@@ -40,6 +40,7 @@ $routes->get( 'logout', 'Login::logout');
 
 // $routes->get('pages','Pages::index');
 $routes->get('/(:segment)', 'Pages::view/$1');
+
 $routes->get('/login/(:segment)','Login::views/$1');
 $routes->get('/register/(:segment)','Register::index');
 $routes->get('/precovery/(:segment)','PassRecovery::pviews/$1');
@@ -47,15 +48,15 @@ $routes->get('/precovery/(:segment)','PassRecovery::pviews/$1');
 $routes->get('admin-home/(:segment)' , 'Dashboard::adminView/$1',['filter'=>'auth']);
 $routes->match(['get', 'post'], 'dashboard/enroll', 'Dashboard::enroll',['filter'=>'auth']);
 $routes->match(['get', 'post'], 'dashboard/staff-enroll', 'Dashboard::staffEnroll',['filter'=>'auth']);
-
+$routes->get('faculty/(:segment)','Faculty::Pagger/$1',['filter'=>'fauth']);
 $routes->match(['get', 'post'], 'dashboard/announce', 'Dashboard::announce',['filter'=>'auth']);
 $routes->match(['get', 'post'], 'dashboard/fee-collector/(:segment)', 'Dashboard::feeMod/$1',['filter'=>'auth']);
 $routes->match(['get', 'post'], 'login/auth', 'Login::auth');
 $routes->match(['get', 'post'], 'dashboard/Search/(:segment)', 'Dashboard::getDetails/$1',['filter'=>'auth']);
 $routes->match(['get', 'post'], 'passrecovery/user/chk', 'PassRecovery::userchk');
 $routes->match(['get', 'post'], 'passrecovery/user/student', 'PassRecovery::studentchk');
-$routes->match(['get', 'post'], 'user/log_fetch', 'Login::getLog',['filter'=>'auth']);
-
+$routes->match(['get', 'post'], 'user/log_fetch', 'Login::getLog',['filter'=>'dauth']);
+$routes->match(['get', 'post'],'/user/suggestion','Pages::logSuggest');
 $routes->match(['get', 'post'], 'login/stafflogin', 'Login::staffLogin');
 $routes->match(['get', 'post'], 'login/studentlogin', 'Login::studLogin');
 

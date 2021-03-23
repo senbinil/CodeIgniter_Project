@@ -1,12 +1,13 @@
 <?php namespace App\Controllers;
 
 use CodeIgniter\Controller;
-
+use App\Models\Suggestion;
 use App\Models\Enrollment;
 use App\Models\FeePay;
 use App\Models\Designation;
 use App\Models\StaffEnrollment;
 use App\Models\Department;
+use App\Models\Course;
 
 use Exception;
 
@@ -21,11 +22,17 @@ class Dashboard extends Controller
     }
 
     public function adminView($page)
-    {
+    { 
+        $session = session();
         $designation=new Designation();
         $department=new Department();
+        $suggest_box=new Suggestion();
         $desig['contentx']=$department->select(['department_id','department_name'])->findAll();
         $desig['content']=$designation->select(['pos_id','pos_name'])->findAll();
+        $data['username']=$session->get('user_id');
+        $suggest_box_content['data']=$suggest_box->select()->orderBy('timestamp','DESC')->findAll(20);
+        $suggest_box_content['faculty']=FALSE;
+
         switch($page)
         {
             case "student-enroll": echo view('dashboard/student-enrollment');
@@ -36,13 +43,27 @@ class Dashboard extends Controller
                                     break;
             case "global-search":echo view('dashboard/global-search');
                                 break;
+            case "suggestion-box":  if(isset($_SESSION['faculty']))
+                                    {   
+                                        $suggest_box_content['faculty']=TRUE;
+                                        echo view('dashboard/suggestion',$suggest_box_content);
+                                    }
+                                    else
+                                    echo view('dashboard/suggestion',$suggest_box_content);
+
+                                    break;
             case "staff-enroll":echo view('dashboard/staff-enrollment',$desig);
                                 break;
-            default:$session = session();
+            
+                                    
+
+                                    break;
+            default:
                                 // echo "Welcome back, ".$session->get('user_id');
-                                $data['username']=$session->get('user_id');
+                               
                                 echo view('dashboard/admin-home',$data);
         }
+        // echo var_dump($_SESSION);
     }
 
 
@@ -170,7 +191,30 @@ class Dashboard extends Controller
 
     public function feeMod($action)
     {   $session=session();
-        if($action=='review' && $this->request->getMethod()=='post')
+        $modelStudent=new Enrollment();
+        $feemodel=new FeePay();
+        $cs=new Course();
+        if($action=='fetch' && $this->request->getPost('type')==1)
+        {
+            $id=$this->request->getPost('id');
+            if($data_dump=$modelStudent->select(['semester','ug_course','gphone'])->where('admin_no',$id)->first())
+            {   
+
+                $post_data['course']=$cs->select()->where('course_id',$data_dump['ug_course'])->first();
+                $post_data['phone']=$data_dump['gphone'];
+                $post_data['sem']=$data_dump['semester']+1;
+                if($post_data['sem']==6)
+                return redirect()->to('/admin-home/feeupdate');
+                else
+                echo json_encode($post_data);
+            }
+            else
+            {
+                echo json_encode(0);
+            }
+            // echo json_encode(array('stat'=>1));
+        }
+        if($action=='review' && $this->request->getMethod()=='post' )
         {
             $data=[
                 'admin_no'=>$this->request->getPost('admin_no'),
@@ -183,33 +227,31 @@ class Dashboard extends Controller
             // var_dump($data);
             echo view('dashboard/fee-review',$data);
         }
-        else
-        {   $modelStudent=new Enrollment();
+            $modelStudent=new Enrollment();
             $studentDetails=$modelStudent->where('admin_no',$this->request->getPost('admission'),'phone',$this->request->getPost('mphone'))->first();
             if($action=='commit' && $this->request->getMethod()=='post' && $studentDetails)
-            {   $model=new FeePay();
-                try
-                {
-                    $model->save([
+            {   
+              try
+             {
+                    $feemodel->save([
                         'admin_no'=>$this->request->getPost('admission'),
                         'semester'=>$this->request->getPost('semester'),
                         'amount'=>$this->request->getPost('amt'),
                         'payment_mode'=>$this->request->getPost('pay'),
-                        'phone'=>$this->request->getPost('mphone')
+                        //'phone'=>$this->request->getPost('mphone')
                     ]);
-                    $data=$model->where('admin_no',$this->request->getPost('admission'),'semester',$this->request->getPost('semester'))->first();
-                    // var_dump($data);
+                    $data=$feemodel->select('payment_id')->where('admin_no',$this->request->getPost('admission'),'semester',$this->request->getPost('semester'))->first();
+                    $postsem=['semester'=>$this->request->getPost('semester')];
+                    $sds=$modelStudent->where('admin_no',$this->request->getPost('admission'))->update(NULL,$postsem);
                     echo view('dashboard/fee-collector',$data);
                 }
-                catch(Exception $e)
-                {
-                    // echo $this->request->getPost('mphone');
-                }
+               catch(Exception $e)
+               {
+                  return redirect()->to('/admin-home/feeupdate');
+               }
             }
-            else
-            return redirect()->to('/admin-home/feeupdate');
-        }
-
+             else
+             redirect()->to('/admin-home/feeupdate');
     }
             
 public function getDetails($cat){

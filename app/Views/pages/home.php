@@ -15,10 +15,10 @@
           <div class="container container-fluid-sm cont" >
           <div class="row bg-transparent p-1" >
             
-            <div class="col-sm-8 card  py-4">
+            <div class="col-sm-8 card border border-light  text-white py-4" style="background-color: #4158D0;background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);">
               <section>
                 <h2>Upcoming Events</h2><br>
-                <hr>
+                <hr class="bg-white">
                 <div class="subcontent">
                  <div class="row">
                                 <div class="col-md-6 ">
@@ -36,7 +36,7 @@
                                 <div class="col-md-6 ">
                                     <div class="feature rounded-icon">
                                         <h3 class="feature-title"><b>Career Guidance </b></h3>
-                                        <p>Career guidance class for BSC CS on 14/07/2020</p>
+                                        <p class="pb-4">Career guidance class for BSC CS on 14/07/2020</p>
                                     </div>
     
                                     <div class="feature rounded-icon">
@@ -48,20 +48,30 @@
     
               </section>
             </div>
-            <div class="col-sm-4 news border bg-primary border py-4 " style="overflow: hidden;">
-          <div class=" bg-dark text-white ">
+            <div class="col-sm-4 news border  border py-1 " style="overflow: hidden;">
+          <div class=" bg-dark text-white " style="background-image: linear-gradient(to right, #FF512F 0%, #DD2476  51%, #FF512F  100%)">
             <h4 align="center">News</h4>
           </div>
 
 
           <div class="smartmarquee example  ">
     
-          <ul class="container news-content bg-primary text-dark px-4" style="overflow:hidden;">
+          <ul class="container news-content  text-dark px-2" style="overflow:hidden;">
           <?php
             if (isset($msg)) {
               // output data of each row
               for($i=0;$i<count($msg) ;$i++)
-              echo  '<li class="font-weight-bold card-body border bg-light">'.$msg[$i]['msg'].'</li>';
+              echo  '<li class="font-weight-bold card-body border bg-light" style="background-image: linear-gradient(to right, #1FA2FF 0%, #12D8FA  51%, #1FA2FF  100%);
+                 text-align: center;
+                 text-transform: uppercase;
+                 transition: 0.5s;
+                 background-size: 200% auto;
+                 color: white;            
+                 box-shadow: 0 0 20px #eee;
+                 border-radius: 10px;
+                 background-position: right center; /* change the direction of the change here */
+                 color: #fff;
+                 text-decoration: none;">'.$msg[$i]['msg'].'</li>';
             } else {
               echo "0 results";
           }
@@ -76,8 +86,8 @@
      
         <hr class="my-5  space"  >
 
-        <div class="container divider mt-5">
-         <section class=" card px-1 py-1 fadeIn">
+        <div class="container text-white divider  mt-5" >
+         <section class=" card px-1 py-1 border border-light  fadeIn" style="background-color: #4158D0;background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);">
           <div class="row">
             <div class="col-md-6">
               <img src="asset/img/idea.jpg"  class="img-fluid z-depth-1-half" alt="">
@@ -88,15 +98,15 @@
               <p>Click  below to learn more about our college.</p>
               <!-- Main heading -->
   
-              <hr>
+              <hr class="bg-white">
 
             
-              <a href="about.php" class="btn btn-primary btn-md" >Read More</a>
+              <div class="btn btn-primary text-white"><a href="/about" class="text-white text-decoration-none" >Read More</a></div>
             </div>
           </div>
          </section>
          <hr class="my-5">
-         <section class="card px-1 py-1">
+         <section class="card  px-1 py-1" style="background-color: #4158D0;background-image: linear-gradient(122deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);">
            <h3 class="text-center mb-5">
              About
            </h3>
@@ -113,7 +123,7 @@
                 <div class="col-10">
                   <h5 class="feature-title">Perfect Ambience</h5>
                   <p class="grey-text">Thanks to IHRD to provide us with a good college ambience .</p>
-                  <hr>            <a href="collegegal.htm" class="btn btn-primary btn-md" >Check out</a>
+                  <hr class="bg-white">            <a href="collegegal.htm" class="btn btn-primary btn-md" >Check out</a>
   
                 </div>
               </div>
@@ -151,7 +161,7 @@
               </div>
               
               <div class="col-md-6 ">
-                <img src="asset/img/gg.jpg" class="img-fluid hatpic"  alt="">
+                <img src="asset/img/gg.jpg" class="img-fluid hatpic rounded"  alt="">
               </div>
            </div>
            

@@ -2,7 +2,7 @@
 
 use App\Models\HomeModel;
 use CodeIgniter\Controller;
-
+use App\Models\Suggestion;
 class Pages extends Controller
 {   
     
@@ -51,11 +51,46 @@ class Pages extends Controller
                             echo view('pages/more');
                             echo view('templates/footer');
                             break;
-                case "admin-login":
+                // case "admin-login":
+                    // case "suggestion":logSuggest();
+                                        
+                    //                     break;
                 default:redirect()->to('/home');
             }
      
         }
       
+    }
+
+    public  function logSuggest()
+    {
+        $suggest_box=new Suggestion();
+        if($this->request->getMethod()=='post' && $this->request->getPost('type')==1)
+        {
+            $email=$this->request->getPost('id');
+            if(filter_var($email,FILTER_VALIDATE_EMAIL))
+            {
+                $message=$this->request->getPost('message');
+                $suggest_box->save([
+                    'email_id'=>$email,
+                    'content'=>$message
+                ]);
+                echo json_encode(array('stat'=>1));
+            }
+            else
+            echo json_encode(array('stat'=>0));
+        }
+        elseif($this->request->getMethod()=='post' and $this->request->getPost('type')==2)
+        {
+            $id=$this->request->getPost('del_id');
+            if(isset($id))
+           {
+                $suggest_box->where('sug_id',$id)->delete();
+                echo json_encode(array('stat'=>1));
+           }
+            else
+                echo json_encode(array('stat'=>0));
+        }
+
     }
 }

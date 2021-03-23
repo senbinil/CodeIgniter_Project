@@ -1,0 +1,59 @@
+{
+  "_from": "@fontsource/open-sans",
+  "_id": "@fontsource/open-sans@4.2.2",
+  "_inBundle": false,
+  "_integrity": "sha512-NbsL1a9asJO6N/5kRxYPCy0kNhKMi9T75kl4QfIGtmpd/5IfB+UIAUxd9AICmCLaH4Osc2TImeTJj94xc9MNKg==",
+  "_location": "/@fontsource/open-sans",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "@fontsource/open-sans",
+    "name": "@fontsource/open-sans",
+    "escapedName": "@fontsource%2fopen-sans",
+    "scope": "@fontsource",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@fontsource/open-sans/-/open-sans-4.2.2.tgz",
+  "_shasum": "59046f772136a44c5999e0189d33c6a26676630c",
+  "_spec": "@fontsource/open-sans",
+  "_where": "C:\\Users\\Binil Sen\\Documents\\Lab\\profile",
+  "author": {
+    "name": "Lotus",
+    "email": "declininglotus@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/fontsource/fontsource/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Self-host the Open Sans font in a neatly bundled NPM package.",
+  "gitHead": "6f1ab8fd3e6c93d96a0fcd131f12409d142d9a9e",
+  "homepage": "https://github.com/fontsource/fontsource/tree/master/packages/open-sans#readme",
+  "keywords": [
+    "fontsource",
+    "font",
+    "font family",
+    "google fonts",
+    "Open Sans",
+    "open-sans"
+  ],
+  "license": "MIT",
+  "main": "index.css",
+  "name": "@fontsource/open-sans",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fontsource/fontsource.git",
+    "directory": "packages/open-sans"
+  },
+  "version": "4.2.2"
+}

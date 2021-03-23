@@ -82,55 +82,61 @@
         </legend>
         
         <center>
+     
             <form action="/dashboard/fee-collector/review" method="post" class="mt-4">
-                <div class="form-group row ">
+            <div class="form-group row ">
                     <label for="" class="col-sm-4 col-form-label">Admission Number</label>
                     <div class="col-sm-4">
-                        <input type="text" name="admin_no" class="form-control" required>
+                        <input type="text" name="admin_no" id="admin_no" class="form-control" required>
                     </div>
+                    <button class="btn btn-danger" type="button" id="fetch">Fetch</button>
                 </div>
+                <hr>
                 <div class="form-group row">
                     <label for="" class="col-sm-4 col-form-label">Course</label>
                     <div class="col-sm-4">
-                        <select name="course" class="form-control" id="">
+                        <input type="text" id="course" name="course" class="form-control " readonly  required id="">
+                        <!-- <select name="course" class="form-control" id="">
                             <option value="init" selected disabled>Select Course</option>
                             <option value="Bsc Computer Science">Bsc Computer Science</option>
                             <option value="Bachelor of Computer Application">Bachelor of Computer Application</option>
-                        </select>
+                        </select> -->
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="" class="col-sm-4 col-form-label">Semester</label>
                     <div class="col-sm-4">
-                     <select name="semester"  class="form-control" id="">
+                        <input type="text" id="semester" name="semester" class="form-control" readonly required id="">
+                     <!-- <select name="semester"  class="form-control" id="">
                          <option value="init" selected disabled>Select Semester</option>
-                         <?php for($i=1;$i<=6;$i++)
-                                echo "<option value=\"$i\">Semester $i</option>";
-                         ?>
+                         <!-- <?php //for($i=1;$i<=6;$i++)
+                                //echo "<option value=\"$i\">Semester $i</option>";
+                         ?> -->
                         
-                     </select>
+                     <!-- </select> --> 
                     </div>
                 </div>
                 <div class="form-group row ">
                 <label for="" class="col-md-4  my-2 col-form-label">Mobile Number</label>
                 <div class="col-md-4 my-2">
-                    <input type="text" class="form-control" id="myio3" name="phone" minlength="10" maxlength="10">
+                    <input type="text" class="form-control" id="mobile" name="phone" readonly required minlength="10" maxlength="10">
                 </div>
                 </div>
               
                 <div class="form-group row">
                     <label for="" class="col-sm-4 col-form-label">Amount</label>
                     <div class="col-sm-4">
-                    <select name="amount" class="form-control" >
+                    <input type="text" class="form-control" id="amount" name="amount" readonly required minlength="10" maxlength="10">
+                    <!-- <select name="amount" cass="form-control" >
                         <option value="15750">15750</option>
                         <option value="16750">16750</option>
-                    </select>
+                    </select> -->
                 </div>
                 </div>
                 <div class="form-group row">
                     <label for="" class="col-sm-4 col-form-label">Paid</label>
                     <div class="col-sm-4">
-                        <select name="mode" class="form-control">
+                        <select name="mode" class="form-control" readonly>
                             <option value="Cash">By Cash</option>
                         </select>
                         </div>
@@ -145,5 +151,36 @@
         </center>
     </fieldset>
     </div>
+
+
+<script>
+$(document).ready(function(){
+    $('#fetch').on('click',function(){
+        var id=$('#admin_no').val();
+        console.log(id);
+        if(id!=='')
+        {
+            $.ajax({
+                url:'/dashboard/fee-collector/fetch',
+                type:'POST',
+                data:{
+                    type:1,
+                    id:id
+                },
+                cache:false,
+                success:function(result){
+                    var data=JSON.parse(result);
+                    console.log(data['sem']);
+                    $('#course').val(data['course']['course_name']);
+                    $('#semester').val(data['sem']);
+                    $('#mobile').val(data['phone']);
+                    $('#amount').val(data['course']['sem_fee']);
+
+                }
+            })
+        }
+    })
+})    
+</script>
 </body>
 </html>

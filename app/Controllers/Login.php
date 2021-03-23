@@ -12,6 +12,7 @@ use App\Models\TimeMachine;
 use App\Models\Studlogin;
 use App\Models\Enrollment;
 use App\Models\Course;
+use App\Models\FeePay;
 use PHPUnit\Framework\MockObject\Stub\ReturnReference;
 
 class Login extends BaseController
@@ -65,6 +66,7 @@ class Login extends BaseController
                     'user_id' =>$data['username'],
                     'email_id' =>$data['email_id'],
                     'logged_in'=>TRUE,
+                    'admin'=>TRUE,
                     'log_time'=>(int)time(),
                     'log_exp'=>(int)time()+(30*60)
                 ];
@@ -95,12 +97,12 @@ class Login extends BaseController
                         'user_id' =>$data['username'],
                         'email_id' =>$postusername['email'],
                         'logged_in'=>TRUE,
+                        'admin'=>FALSE,
                         'log_time'=>(int)time(),
                         'log_exp'=>(int)time()+(30*60)
                     ];
                     $session->set($ses_data);
-                    echo view('userview/header',$data);
-                    echo view('userview/facultyview');
+                  return redirect()->to('/faculty/home');
                 }
             }
             else
@@ -244,6 +246,16 @@ class Login extends BaseController
             $data=$time_log->select()->orderBy('timelog','DESC')->where('user_id',$id)->findAll(10);
             if($data)
             echo json_encode(array($data));
+        }
+        elseif($this->request->getPost('type')==2)
+        {   
+            $fee_log=new FeePay();
+            $id=$this->request->getPost('id');
+            $sem=$this->request->getPost('semester');
+            if($fee_log->select()->where(['semester'=>$sem,'admin_no'=>$id])->first())
+            echo json_encode(array('stat'=>1));
+            else
+            echo json_encode(array('stat'=>1));
         } 
      }
 }

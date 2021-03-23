@@ -1,4 +1,4 @@
-@font-face {
+/* @font-face {
     font-family: Montserrat;
     src: url(/asset/fonts/Montserrat-Regular.ttf);
   
@@ -14,18 +14,20 @@
   src: url(/asset/fonts/Montserrat-Bold.ttf);
   font-weight: bold;
 
-}
-
+} */
+@import url("/asset/fonts/open-sans/400.css");
+@import url("/asset/fonts/open-sans/300.css");
 
      /* body {
      /* height:100%; ADD this */
      /* position: relative; */
-      */
+    
 
  /* } */
      body {
-   font-family: 'Montserrat',sans-serif;
+   font-family: 'Open Sans',sans-serif;
    /* Margin bottom by footer height */
+   font-weight: 300;
    min-height: 100vh;
  }
  html{
@@ -71,4 +73,4 @@ height:fit-content;
          font-size: x-large;
          font-weight: 500;
      }
-  
+
