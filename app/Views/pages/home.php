@@ -48,13 +48,13 @@
     
               </section>
             </div>
-            <div class="col-sm-4 news border  border py-1 " style="overflow: hidden;">
+            <div class="col-sm-4 news border  border " style="overflow: hidden; min-height:400px;">
           <div class=" bg-dark text-white " style="background-image: linear-gradient(to right, #FF512F 0%, #DD2476  51%, #FF512F  100%)">
             <h4 align="center">News</h4>
           </div>
 
 
-          <div class="smartmarquee example  ">
+          <div class="smartmarquee example">
     
           <ul class="container news-content  text-dark px-2" style="overflow:hidden;">
           <?php
@@ -76,6 +76,7 @@
               echo "0 results";
           }
           ?>
+         
           </ul>
           </div>
 
@@ -84,9 +85,8 @@
         
       
      
-        <hr class="my-5  space"  >
 
-        <div class="container text-white divider  mt-5" >
+        <div class="container text-white   mt-5" >
          <section class=" card px-1 py-1 border border-light  fadeIn" style="background-color: #4158D0;background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);">
           <div class="row">
             <div class="col-md-6">
@@ -101,7 +101,7 @@
               <hr class="bg-white">
 
             
-              <div class="btn btn-primary text-white"><a href="/about" class="text-white text-decoration-none" >Read More</a></div>
+              <div class="btn btn-primary text-white mx-3 "><a href="/about" class="text-white text-decoration-none" >Read More</a></div>
             </div>
           </div>
          </section>

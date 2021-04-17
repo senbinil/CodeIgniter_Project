@@ -21,6 +21,7 @@ $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
 $routes->setAutoRoute(false);
+// $routes->get('/', 'Home::index');
 
 /**
  * --------------------------------------------------------------------
@@ -31,19 +32,22 @@ $routes->setAutoRoute(false);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
-$routes->get('/', 'Home::index');
-$routes->match(['get', 'post'], 'news/create', 'News::create');
 $routes->get('/admin-home' , 'Dashboard::index',['filter'=>'auth']);
-$routes->get('news', 'News::index');
 $routes->get( 'logout', 'Login::logout');
-// $routes->get('(home,about)', 'Pages::view/$1');
-
-// $routes->get('pages','Pages::index');
 $routes->get('/(:segment)', 'Pages::view/$1');
-
 $routes->get('/login/(:segment)','Login::views/$1');
 $routes->get('/register/(:segment)','Register::index');
 $routes->get('/precovery/(:segment)','PassRecovery::pviews/$1');
+// guest route
+$routes->match(['get','post'],'/guest/register','Guest::sendMail');
+$routes->match(['get','post'],'/guest/registerComplete','Guest::completeReg');
+
+$routes->get('guest/(:segment)','Guest::guestView/$1',['filter'=>'guest']);
+$routes->get('/guest/postregister/hash=(:any)&email=(:any)','Guest::Postreg/$1/$2');
+
+$routes->match(['post'],'login/guest','Login::guestLogin');
+$routes->match(['post'],'/guest/completeRegistration','Guest::completeReg');
+$routes->match(['post'],'/guest/csfetch','Guest::fetchCs');
 
 $routes->get('admin-home/(:segment)' , 'Dashboard::adminView/$1',['filter'=>'auth']);
 $routes->match(['get', 'post'], 'dashboard/enroll', 'Dashboard::enroll',['filter'=>'auth']);
@@ -59,6 +63,10 @@ $routes->match(['get', 'post'], 'user/log_fetch', 'Login::getLog',['filter'=>'da
 $routes->match(['get', 'post'],'/user/suggestion','Pages::logSuggest');
 $routes->match(['get', 'post'], 'login/stafflogin', 'Login::staffLogin');
 $routes->match(['get', 'post'], 'login/studentlogin', 'Login::studLogin');
+$routes->get('admin/common/(:segment)','Common::Pagger/$1',['filter'=>'common']);
+$routes->match(['get','post'],'admin/common/Payment','Common::getFee',['filter'=>'common']);
+
+
 
 
 /**

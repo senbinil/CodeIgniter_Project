@@ -9,6 +9,8 @@
     <script src="<?= base_url();?>/asset/js/jquery.min.js"></script>
     <script src="<?= base_url();?>/asset/js/bootstrap.min.js" ></script>
     <link href="<?= base_url();?>/asset/css/bootstrap.css" rel="stylesheet" >
+    <link rel="stylesheet" href="/asset/css/common.css">
+
     <title>DashBoard</title>
     
     <style>
@@ -55,33 +57,6 @@ body{
 </head>
 <body>
  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -206,13 +181,13 @@ body{
                             <a href="#" class="nav-link">Search</a>
                         </div> -->
                         <div class="col-md-3 col-xs-6">
-                            <a href="#" class="nav-link">Bulletin updates</a>
+                            <a href="/admin/common/notification" class="nav-link">Notification Panel</a>
                         </div>
                         <div class="col-md-3 col-xs-6">
                             <a href="#" class="nav-link">Resources</a>
                         </div> 
                          <div class="col-md-3 col-xs-6">
-                            <a href="/admin-home/suggestion-box" class="nav-link">Suggestion Inbox </a>
+                            <a href="/admin/common/suggestion-box" class="nav-link">Suggestion Inbox </a>
                         </div>
                     </div>
                 </div>
@@ -240,7 +215,7 @@ body{
                             <a href="admin-home/feeupdate" class="nav-link">Fee Collector</a>
                         </div>
                         <div class="col-md-3 col-xs-6">
-                            <a href="admin-home/message-center" class="nav-link">Message Center</a>
+                            <a href="admin/common/message-center" class="nav-link">Message Center</a>
                         </div> 
                          
                     </div>
@@ -273,7 +248,7 @@ body{
     <div class="col-md-6">
         <div class="card">
         <div class="card-body bg-danger text-white">
-             <h5 class="card-title"><i class="fa fa-rocket"></i>  Fast Track</h5><hr class="bg-white">
+             <h5 class="card-title"><i class="fa fa-rocket ml-"></i>  Fast Track</h5><hr class="bg-white">
             <form action="dashboard/Search/staff" class="form mx-4" method="post">
                 <div class="row">
                     <label for="adminno" class="col-form-label">Employee </label>
@@ -295,26 +270,77 @@ body{
 
 <span class="px-3"></span>
 <div class="row mx-1">
-    <div class="col-md-6 card2">
+    <div class="col-12 card2">
         <div class="card">
           <div class="card-header d-flex bg-info text-white ">
-            <h5 class="card-title">Suggestion Inbox </span></h5>
+            <h5 class="card-title"> Payment Search </span></h5>
             <span class="ml-auto"><i class="fa fa-comment-o"></i>
           </div>
                 <div class="card-body  bg-info text-white">
-                    <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, itaque fuga? Eum ratione quod aperiam quisquam fuga nulla distinctio consectetur vel, iste ipsam sunt facere vero cumque molestiae fugiat iure!</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6 card2">
-        <div class="card">
-        <div class="card-body bg-primary text-white">
-                <h5 class="card-title">Recent Fee Payment</h5><hr class="bg-white">
-                <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, itaque fuga? Eum ratione quod aperiam quisquam fuga nulla distinctio consectetur vel, iste ipsam sunt facere vero cumque molestiae fugiat iure!</p>
+                <form action="admin/common/Payment" class="form mx-4" method="post">
+                <div class="row">
+                    <label for="adminno" class="col-form-label">Admission ID </label>
+                    <div class="form-group col-sm-4">
+                        <input type="text" class="form-control"  name="adminno" placeholder="ID">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Search" class="form-control btn btn-dark btn-sm">
+                    </div>
+                </div>
+            </form>            
             </div>
         </div>
     </div>
 </div>
+<section>
+    <div id="accordion mb-4">
+        <div class="card m-2">
+            <div class="card-header bg-dark text-white" id="item2">
+                <div class="d-flex ">
+                    <h5 class=>Recent  Payments</h5>
+                    <span class=" ml-auto " data-toggle="collapse" data-target="#item3sub" aria-expanded="true" aria-controls="item3sub">
+                       <!-- <span class="mr-4 more font-weight-light"> <a href="#">More</a> </span> -->
+                        <i class="fa fa-window-minimize" title="Minimize"></i>
+                    </span>
+                </div>
+            </div>
+            <div id="item3sub">
+                <div class="card-body bg-light">
+                    <div class="row  table-responsive-md">
+                        <table class="table">
+                            <caption class="ml-auto">Recent  Payments</caption>
+                            <thead>
+                              <tr>
+                                <th scope="col">Payment Id</th>
+                                <th scope="col">Admission Id</th>
+                                <th scope="col">Semester</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Time</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <?php for($i=0;$i<count($paymentinfo);$i++) 
+                                {
+
+                                   echo " <tr>
+                                    <th scope=\"row\">".$paymentinfo[$i]['payment_id']."</th>
+                                    <td>".$paymentinfo[$i]['admin_no']."</td>
+                                    <td>".$paymentinfo[$i]['semester']."</td>
+                                    <td>".$paymentinfo[$i]['amount']."</td>
+                                   <td>".$paymentinfo[$i]['timelog']."</td>
+                                  </tr>";
+                                }
+                              
+                              ?>
+                            </tbody>
+                          </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section>
     <div id="accordion mb-4">
         <div class="card m-2">
@@ -391,12 +417,6 @@ body{
                         </div>
                         <div class="col-md-3 col-xs-6">
                             <a href="#" class="nav-link">Salary</a>
-                        </div>
-                        <div class="col-md-3 col-xs-6">
-                            <a href="#" class="nav-link">M</a>
-                        </div> 
-                         <div class="col-md-3 col-xs-6">
-                            <a href="#" class="nav-link">Suggestion Inbox </a>
                         </div>
                     </div>
                 </div>

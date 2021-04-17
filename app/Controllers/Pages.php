@@ -7,11 +7,7 @@ class Pages extends Controller
 {   
     
    
-    public function index()
-    {
-        return view('welcome_message');
-
-    }
+    
 
     public function view($page = 'home')
     { 
@@ -24,8 +20,7 @@ class Pages extends Controller
 
        if($page=='home'){
            $model=new HomeModel();
-           $data['msg']=$model->select('msg')->orderby('msg_id','DESC')->findall();
-        //    var_dump($data['msg'][0]['msg']);
+           $data['msg']=$model->select('msg')->orderby('msg_id','DESC')->findall(15);
         echo view('templates/header');
         echo view('resources/home-style');
         echo view('templates/body');
@@ -38,11 +33,8 @@ class Pages extends Controller
             switch($page)
             {
                 case "about":   echo view('templates/header');
-
                                 echo view('templates/body');
-
                                 echo view('pages/'.$page);
-                     //    echo view('templates/particle');
                                 echo view('templates/footer');
                                 break;
                 case "more":echo view('templates/header');
@@ -51,11 +43,19 @@ class Pages extends Controller
                             echo view('pages/more');
                             echo view('templates/footer');
                             break;
-                // case "admin-login":
-                    // case "suggestion":logSuggest();
-                                        
-                    //                     break;
-                default:redirect()->to('/home');
+                case 'notification':$model=new HomeModel();
+                                    $data['msg']=$model->select()->orderby('msg_id','DESC')->findall();
+                                    echo view('templates/header');
+                                    echo view('templates/body');
+                                    echo view('pages/notification',$data);
+                                    echo view('templates/footer');
+                                    break; 
+                case 'Gallery': echo view('templates/header');
+                                echo view('templates/body');
+                                echo view('pages/gallery');
+                                echo view('templates/footer');
+                                break;
+                default:return redirect()->to('/home');
             }
      
         }

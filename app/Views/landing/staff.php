@@ -74,7 +74,21 @@
                     </table>
 
     </div>
+    <div class=" mt-sm-2">
+<div class="payment   text-white" style="font-size:25px;height:300px;background-image: radial-gradient( circle farthest-corner at 16.5% 28.1%,  rgba(15,27,49,1) 0%, rgba(0,112,218,1) 90% );">
+<h4 class=" text-center text-center py-2"> Library</h4>
+<hr class="bg-white">
+<div class="row text-dark mx-4">
+<ul>
+<li class="nav-link my-4"> <a href="" class="text-white">Browse</a> </li>
+<li class="nav-link my-4 "><a href="" class="text-white">Submit Material</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
         </div>
+        
     </div>
 <script>
     $(document).ready(function(){

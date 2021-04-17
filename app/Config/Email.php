@@ -14,7 +14,7 @@ class Email extends BaseConfig
 	/**
 	 * @var string
 	 */
-	public $fromName;
+	public $fromName='logger';
 
 	/**
 	 * @var string
@@ -33,14 +33,14 @@ class Email extends BaseConfig
 	 *
 	 * @var string
 	 */
-	public $protocol = 'mail';
+	public $protocol = 'smtp';
 
 	/**
 	 * The server path to Sendmail.
 	 *
 	 * @var string
 	 */
-	public $mailPath = '/usr/sbin/sendmail';
+	public $mailPath;
 
 	/**
 	 * SMTP Server Address

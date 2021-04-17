@@ -13,6 +13,8 @@ use App\Models\Studlogin;
 use App\Models\Enrollment;
 use App\Models\Course;
 use App\Models\FeePay;
+use App\Models\GuestRegister;
+use App\Models\GuestModel;
 use PHPUnit\Framework\MockObject\Stub\ReturnReference;
 
 class Login extends BaseController
@@ -258,6 +260,60 @@ class Login extends BaseController
             echo json_encode(array('stat'=>1));
         } 
      }
+
+     public function guestLogin()
+     {
+        $session=session();
+        if($this->request->getMethod()=='post')
+        {
+            $username=$this->request->getVar('username');
+            $pass=$this->request->getVar('password');
+            $guestlogin=new GuestRegister();
+            $data_dump=$guestlogin->select()->where(['TID'=>$username,'password'=>$pass])->first();
+            $guest=new GuestModel();
+            $chk=$guest->select()->where('GID',$username)->first();
+            if(isset($data_dump) and $data_dump['active']==1 and !isset($chk))
+            {
+                $timeMac=new TimeMachine();
+                $timeMac->save([
+                    'user_id'=>$username
+                ]);
+                $ses_data=[
+                    'logged_in'=>TRUE,
+                    'guest'=>TRUE,
+                    'gid'=>$username,
+                    'filled'=>FALSE,
+                    'email'=>$guestlogin['email'],
+                    'phone'=>$guestlogin['phone']
+
+                ];
+                $session->set($ses_data);
+                return redirect()->to('/guest/fillup');
+            }
+            elseif(isset($guest))
+            {
+                $timeMac=new TimeMachine();
+                $timeMac->save([
+                    'user_id'=>$username
+                ]);
+                $ses_data=[
+                    'logged_in'=>TRUE,
+                    'guest'=>TRUE,
+                    'gid'=>$username,
+                    'filled'=>TRUE,
+                   
+                ];
+                $session->set($ses_data);
+                return redirect()->to('/guest/profile');
+
+            }
+            else
+            return redirect()->to('/home');
+        }
+        return redirect()->to('/home');
+     }
+
+   
 }
 
 

@@ -8,6 +8,7 @@ use App\Models\Designation;
 use App\Models\StaffEnrollment;
 use App\Models\Department;
 use App\Models\Course;
+use App\Models\HomeModel;
 
 use Exception;
 
@@ -16,9 +17,14 @@ class Dashboard extends Controller
     public function index()
     {
         $session = session();
+        $recentFee=new FeePay();
+        $data['paymentinfo']=$recentFee->select()->orderBy('payment_id','DESC')->findAll(5);
+       
         // echo "Welcome back, ".$session->get('user_id');
         $data['username']=$session->get('user_id');
         echo view('dashboard/admin-home',$data);
+        var_dump($data);
+
     }
 
     public function adminView($page)
@@ -26,42 +32,24 @@ class Dashboard extends Controller
         $session = session();
         $designation=new Designation();
         $department=new Department();
-        $suggest_box=new Suggestion();
         $desig['contentx']=$department->select(['department_id','department_name'])->findAll();
         $desig['content']=$designation->select(['pos_id','pos_name'])->findAll();
         $data['username']=$session->get('user_id');
-        $suggest_box_content['data']=$suggest_box->select()->orderBy('timestamp','DESC')->findAll(20);
-        $suggest_box_content['faculty']=FALSE;
+        
 
         switch($page)
         {
             case "student-enroll": echo view('dashboard/student-enrollment');
                                     break;
-            case "message-center": echo view('dashboard/message-center');
-                                    break;
             case "feeupdate": echo view('dashboard/fee-collector');
                                     break;
-            case "global-search":echo view('dashboard/global-search');
-                                break;
-            case "suggestion-box":  if(isset($_SESSION['faculty']))
-                                    {   
-                                        $suggest_box_content['faculty']=TRUE;
-                                        echo view('dashboard/suggestion',$suggest_box_content);
-                                    }
-                                    else
-                                    echo view('dashboard/suggestion',$suggest_box_content);
-
-                                    break;
+            // case "global-search":redirect()->to('/admin/common/global-search');
+            //                      break;
+           
             case "staff-enroll":echo view('dashboard/staff-enrollment',$desig);
                                 break;
-            
-                                    
-
-                                    break;
-            default:
-                                // echo "Welcome back, ".$session->get('user_id');
-                               
-                                echo view('dashboard/admin-home',$data);
+          
+            default:redirect()->to('/home');
         }
         // echo var_dump($_SESSION);
     }
@@ -286,6 +274,19 @@ public function getDetails($cat){
 
 }
 
+public function Notify()
+{   
+    $notify=new HomeModel();
+    // if()
+    // {
+
+    // }
+    // elseif()
+    // {
+
+    // }
+
+}
 }
 
 ?>

@@ -12,7 +12,10 @@ class Filters extends BaseConfig
 		'honeypot' => \CodeIgniter\Filters\Honeypot::class,
 		'auth'    => \App\Filters\Auth::class,
 		'fauth'	   => \App\Filters\Facultyaccess::class,
-		'dauth'   =>\App\Filters\DefaultAuth::class
+		'dauth'   =>\App\Filters\DefaultAuth::class,
+		'common'	   => \App\Filters\UserOnly::class,
+		'guest'	   => \App\Filters\Guest::class,
+
 		
 	];
 

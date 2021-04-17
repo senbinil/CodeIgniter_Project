@@ -11,6 +11,7 @@
     <script src="<?= base_url();?>/asset/js/jquery.min.js"></script>
     <script src="<?= base_url();?>/asset/js/bootstrap.min.js" ></script>
     <link href="<?= base_url();?>/asset/css/bootstrap.css" rel="stylesheet" >
+    <link rel="stylesheet" href="/asset/css/common.css">
 
     <?php if(isset($_SESSION['emp_id'])) echo "<script>alert(\"Employee ID:".$_SESSION['emp_id']."\");</script>" ?>
 

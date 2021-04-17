@@ -24,7 +24,7 @@
                             <a href="#" class="nav-link">Resources</a>
                         </div> 
                          <div class="col-md-3 col-xs-6">
-                            <a href="/admin-home/suggestion-box" class="nav-link">Suggestion Inbox </a>
+                            <a href="/admin/common/suggestion-box" class="nav-link">Suggestion Inbox </a>
                         </div>
                     </div>
                 </div>

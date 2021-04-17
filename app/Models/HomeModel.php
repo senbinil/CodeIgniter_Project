@@ -5,5 +5,5 @@ use CodeIgniter\Model;
 class HomeModel extends Model
 {
     protected $table='bulletin';
-    protected $allowedFields=['msg_id','msg_cat'];
+    protected $allowedFields=['msg_id','msg_cat','msg','time_log'];
 }
