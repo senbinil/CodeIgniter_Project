@@ -263,8 +263,8 @@ body{
       </div>
 
       <div class="modal-footer">
-       <a href="/admin-home"> <button type="button" class="btn btn-secondary" >Close</button></a>
-        <button type="button" class="btn btn-primary">Save changes</button>
+       <a href="<?php if(!$_SESSION['admin']) echo "/faculty/home"; else echo "/admin-home";?>"> <button type="button" class="btn btn-secondary" >Close</button></a>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
       </div>
     </div>
   </div>

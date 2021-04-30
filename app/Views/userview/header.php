@@ -72,7 +72,7 @@ body{
                         <a class="nav-link text-dark " href="#">Dashboard Home</a>
                     </li>
                     <li class="nav-item  mx-4 my-1">
-                        <a class="nav-link  text-dark" href="/logout">Logout</a>
+                        <a class="nav-link  text-dark" href="/logout/admin">Logout</a>
                     </li>
                 </ul>
            

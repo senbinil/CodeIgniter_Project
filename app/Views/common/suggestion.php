@@ -56,10 +56,10 @@ header{
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item  btn btn-danger mx-2 my-1">
-                        <a class="nav-link text-white" href="<?php if($faculty==TRUE) echo "/faculty/home"; else echo "/admin-home";?>">Dashboard Home</a>
+                        <a class="nav-link text-white" href="<?php if(!$_SESSION['admin']) echo "/faculty/home"; else echo "/admin-home";?>">Dashboard Home</a>
                     </li>
                     <li class="nav-item btn btn-danger  mx-2 my-1">
-                        <a class="nav-link text-white" href="/logout">Logout</a>
+                        <a class="nav-link text-white" href="/logout/admin">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -70,7 +70,7 @@ header{
     <div class="row mb-3">
     <h3 class="col-md-4 col-sm-12 ">Suggestion Box: </h3>
     <span class="col-md-4 col-sm-12">
-    <button class="btn btn-success" onclick="del_inbox()">Delete 10 Message</button></span><br> <br>
+    <!-- <button class="btn btn-success" onclick="del_inbox()">Delete 10 Message</button></span><br> <br> -->
     <!--<span class="col-md-4 col-sm-12"><button class="btn btn-success">Empty inbox</button></span>-->
     </div>
 </span>
@@ -133,12 +133,12 @@ function del(id){
     else
     return false;
 }
-function del_inbox(){
-if(confirm("Are you sure you want to delete last 10 message from inbox?"))
-{ 
-    window.location="delmsg.php?del_in=true";
-}
-}
+// function del_inbox(){
+// if(confirm("Are you sure you want to delete last 10 message from inbox?"))
+// { 
+//     window.location="delmsg.php?del_in=true";
+// }
+// }
 </script>
 </body>
 </html>

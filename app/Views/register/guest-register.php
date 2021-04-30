@@ -1,6 +1,6 @@
 <hr>
   <div class=" wrapper container  " style="margin-top:300px; ">
-      <h3 align="center">New User </h3>
+      <h3 align="center" class="display-2">New User </h3>
       <p class="intro text-center py-4 ">Create an account starting with filling this form</p>
 
       <div class="form"  mt-4 text-center">

@@ -6,6 +6,10 @@ use App\Models\Stcat;
 use App\Models\Syllabus;
 use App\Models\Subject;
 use App\Models\GuestModel;
+use App\Models\Admissionstat;
+use App\Models\Admission_rq;
+
+
 class Guest extends Controller
 {
     public function sendMail()
@@ -224,6 +228,42 @@ class Guest extends Controller
 //     {
 
 //     }
+    public function fetchAdmission()
+    {
+        if($this->request->getMethod()=='post' and $this->request->getVar('type')==1)
+        {
+            $admissionLog=new Admissionstat();
+            $data_dump=$admissionLog->select()->where(['year'=>date('Y'),'status'=>1])->findAll();
+            echo json_encode($data_dump);
+        }
+        if($this->request->getMethod()=='post' and $this->request->getVar('type')==2)
+        {
+            $send_rq=new Admission_rq();
+            $user_id=$this->request->getVar('guest_id');
+            $option_1=$this->request->getVar('option_1');
+            $option_2=$this->request->getVar('option_2');
+            if($send_rq->select()->where('guest_id',$user_id)->first())
+            echo json_encode(array('stat'=>0));
+            else
+            {
+                try
+                {
+                    $stat=$send_rq->save([
+                        'guest_id'=>$user_id,
+                        'option_1'=>$option_1,
+                        'option_2'=>$option_2
+                    ]);
+                    $temp_app=$send_rq->select('application_id')->where('guest_id',$user_id)->first();
+                    if($stat and $temp_app)
+                    echo json_encode(array('stat'=>1,'app_no'=>$temp_app['application_id']));
+                }
+                catch (Exception $e){
+                    echo json_encode(array('stat'=>2));
+                }
+            }
+
+        }
+    }
 }
 
 

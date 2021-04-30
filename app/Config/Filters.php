@@ -15,6 +15,8 @@ class Filters extends BaseConfig
 		'dauth'   =>\App\Filters\DefaultAuth::class,
 		'common'	   => \App\Filters\UserOnly::class,
 		'guest'	   => \App\Filters\Guest::class,
+		'student'	   => \App\Filters\Student::class,
+		'staff'	   => \App\Filters\Dstaff::class,
 
 		
 	];

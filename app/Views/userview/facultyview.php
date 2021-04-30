@@ -18,13 +18,13 @@
                             <a href="#" class="nav-link">Search</a>
                         </div> -->
                         <div class="col-md-3 col-xs-6">
-                            <a href="#" class="nav-link">Bulletin updates</a>
+                            <a href="/common/notification" class="nav-link">Bulletin updates</a>
                         </div>
                         <div class="col-md-3 col-xs-6">
-                            <a href="#" class="nav-link">Resources</a>
+                            <a href="/common/resources" class="nav-link">Resources</a>
                         </div> 
                          <div class="col-md-3 col-xs-6">
-                            <a href="/admin/common/suggestion-box" class="nav-link">Suggestion Inbox </a>
+                            <a href="/common/suggestion-box" class="nav-link">Suggestion Inbox </a>
                         </div>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
         <div class="card-body bg-danger text-white">
              <h5 class="card-title"><i class="fa fa-rocket"></i>Fast Track</h5><hr class="bg-white">
 
-            <form action="dashboard/Search/student" class="form mx-4" method="post">
+            <form action="/common/Search/student" class="form mx-4" method="post">
                 <div class="row">
                     <label for="adminno" class="col-form-label">Admission </label>
                     <div class="form-group col-sm-4">
@@ -57,7 +57,7 @@
         <div class="card">
         <div class="card-body bg-danger text-white">
              <h5 class="card-title"><i class="fa fa-rocket"></i>  Fast Track</h5><hr class="bg-white">
-            <form action="" class="form mx-4" method="post">
+            <form action="/common/Search/staff" class="form mx-4" method="post">
                 <div class="row">
                     <label for="adminno" class="col-form-label">Employee </label>
                     <div class="form-group col-sm-4">

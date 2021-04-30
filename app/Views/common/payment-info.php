@@ -88,7 +88,7 @@ body{
                         <a class="nav-link text-white" href="<?php if($faculty==TRUE) echo "/faculty/home"; else echo "/admin-home";?>">Dashboard Home</a>
                     </li>
                     <li class="nav-item btn btn-danger  mx-2 my-1">
-                        <a class="nav-link text-white" href="/logout">Logout</a>
+                        <a class="nav-link text-white" href="/logout/admin">Logout</a>
                     </li>
                 </ul>
             </div>

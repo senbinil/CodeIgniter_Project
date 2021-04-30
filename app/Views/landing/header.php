@@ -46,7 +46,7 @@
                     <li class="nav-item username dropdown active  bg-light mx-4 ">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user mx-2"></i><span><?=$_SESSION['username']?></span> </a>
                     <div class="dropdown-menu">
-                            <a href="/logout" class="dropdown-item">Logout</a>
+                            <a href="/logout/<?php if(isset($_SESSION['D_staff']))echo 'staff';else echo 'student';?>" class="dropdown-item">Logout</a>
                     </div>
                     </li>
                 </ul>

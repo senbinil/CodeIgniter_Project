@@ -94,7 +94,7 @@
 <hr class="bg-white">
 <div class="row text-dark mx-4">
 <ul>
-<li class="nav-link my-4"> <a href="" class="text-white">Browse</a> </li>
+<li class="nav-link my-4"> <a href="/common/resources/library" class="text-white">Browse</a> </li>
 <li class="nav-link my-4 "><a href="" class="text-white">Submit Material</a></li>
 </ul>
 </div>

@@ -5,10 +5,10 @@
   <div class="container">
             <form  action="/login/guest" method="post">
                 <div class="row form-group d-flex justify-content-center ">
-                  <input type="text" name="username" class="form-control col-md-6" placeholder="Username" onkeypress="return onlyNumberKey(event)" minlength="3">
+                  <input type="text" name="username" class="form-control col-md-6" placeholder="Username" required onkeypress="return onlyNumberKey(event)" minlength="3">
                 </div>
                 <div class="form-group d-flex justify-content-center row ">
-                  <input type="password" name="password" class="form-control col-md-6" id="password" maxlength="50" onkeypress="return onlyNumberKey(event)" minlength="8" placeholder="Password" value="">
+                  <input type="password" name="password" class="form-control col-md-6" id="password" maxlength="50" required onkeypress="return onlyNumberKey(event)" minlength="8" placeholder="Password" value="">
                 </div>
                 <div class="form-check form-check-inline d-flex justify-content-center">
                   <input type="checkbox" class="form-check-input" id="showpass" onclick="toggle()">

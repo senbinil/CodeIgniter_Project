@@ -11,8 +11,8 @@ class Facultyaccess implements FilterInterface
         
             if(session()->get('logged_in'))
            {
-            if(session()->get('admin'))
-                { session_destroy();
+            if(!isset($_SESSION['admin']))
+                { 
                 return redirect()->to('/home');
                 }
            }

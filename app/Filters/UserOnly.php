@@ -10,9 +10,9 @@ class UserOnly implements FilterInterface
     {
         
       
-           if(!session()->get('logged_in') and !isset($_SESSION['admin']))
+           if(!session()->get('logged_in') or isset($_SESSION['guest']))
            {
-               
+                session_destroy();
                return redirect()->to('/home');
            }
          //}

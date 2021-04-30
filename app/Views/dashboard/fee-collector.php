@@ -25,10 +25,7 @@
         padding: 35px 22px;
 
      }
-     @font-face{
-      font-family:Montserrat;
-      src: url(fonts/Montserrat-Regular.ttf);
-    }
+
      body{
          font-family: 'Montserrat',sans-serif;
          height: 100%;

@@ -73,10 +73,10 @@
 
       
                       <!-- Name -->
-                      <input type="text" id="defaultSubscriptionFormPassword"   maxlength="6" minlength="4"  autocomplete="off" onkeypress="return onlyNumberKey(event)" name="emp_id" required class="form-control mb-4" placeholder="Username">
+                      <input type="text" id="defaultSubscriptionFormPassword"   maxlength="6" minlength="4"  required autocomplete="off" onkeypress="return onlyNumberKey(event)" name="emp_id" required class="form-control mb-4" placeholder="Username">
       
                       <div class="input-group">
-                      <input type="password" class="form-control pwd" name="password" placeholder="Password">
+                      <input type="password" class="form-control pwd" name="password" required placeholder="Password">
 
                         <span class="input-group-btn">
                             <button class="btn btn-light reveal" title="Show Password" type="button"><i class="fa fa-eye"></i></button>

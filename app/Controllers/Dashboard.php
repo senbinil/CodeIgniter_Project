@@ -9,7 +9,12 @@ use App\Models\StaffEnrollment;
 use App\Models\Department;
 use App\Models\Course;
 use App\Models\HomeModel;
-
+use App\Models\Admissionstat;
+use App\Models\Admission_rq;
+use App\Models\GuestModel;
+use App\Models\Stcat;
+use App\Models\Subject;
+use App\Models\Syllabus;
 use Exception;
 
 class Dashboard extends Controller
@@ -18,12 +23,13 @@ class Dashboard extends Controller
     {
         $session = session();
         $recentFee=new FeePay();
+        $admin_rq=new Admission_rq();
+        $data['admission_rq']=$admin_rq->select()->orderBy('timelog','DESC')->findAll(5);
         $data['paymentinfo']=$recentFee->select()->orderBy('payment_id','DESC')->findAll(5);
-       
+        
         // echo "Welcome back, ".$session->get('user_id');
         $data['username']=$session->get('user_id');
         echo view('dashboard/admin-home',$data);
-        var_dump($data);
 
     }
 
@@ -35,7 +41,10 @@ class Dashboard extends Controller
         $desig['contentx']=$department->select(['department_id','department_name'])->findAll();
         $desig['content']=$designation->select(['pos_id','pos_name'])->findAll();
         $data['username']=$session->get('user_id');
-        
+        $admissionlog=new Admissionstat();
+        $admissionContent['adminlog']=$admissionlog->select()->findAll(10);
+        $admin_rq=new Admission_rq();
+        $data['admission_rq']=$admin_rq->select()->orderBy('timelog','DESC')->findAll(20);
 
         switch($page)
         {
@@ -43,10 +52,11 @@ class Dashboard extends Controller
                                     break;
             case "feeupdate": echo view('dashboard/fee-collector');
                                     break;
-            // case "global-search":redirect()->to('/admin/common/global-search');
-            //                      break;
-           
+           case 'adminlog':echo view('dashboard/admissionLog',$admissionContent);
+                            break;
             case "staff-enroll":echo view('dashboard/staff-enrollment',$desig);
+                                break;
+            case 'admission_log':echo view('dashboard/admission_rq',$data);
                                 break;
           
             default:redirect()->to('/home');
@@ -242,51 +252,181 @@ class Dashboard extends Controller
              redirect()->to('/admin-home/feeupdate');
     }
             
-public function getDetails($cat){
+    public function getDetails($cat){
 
-    if($cat=="student" && $this->request->getMethod()=='post')
-    {
-        $studModel=new Enrollment();
-        try{
-            $user=$studModel->where('admin_no',$this->request->getPost('student_id'))->first();
-            if(isset($user))
-            echo view('dashboard/global-search-student',$user);
-            else
-             return redirect()->to('/admin-home');
-        }
-        catch(Exception $e)
+        if($cat=="student" && $this->request->getMethod()=='post')
         {
-            echo $e;
+            $studModel=new Enrollment();
+            try{
+                $user=$studModel->where('admin_no',$this->request->getPost('student_id'))->first();
+                if(isset($user))
+                echo view('dashboard/global-search-student',$user);
+                else
+                return redirect()->to('/admin-home');
+            }
+            catch(Exception $e)
+            {
+                echo $e;
+            }
         }
-    }
-    elseif($cat=="staff" && $this->request->getMethod()=='post')
-    {
-        $stud=new StaffEnrollment();
-        $user=$stud->select()->where('emp_id',$this->request->getPost('emp_id'))->first();
-        if(isset($user))
-        echo view('dashboard/global-search-staff',$user);
+        elseif($cat=="staff" && $this->request->getMethod()=='post')
+        {
+            $stud=new StaffEnrollment();
+            $user=$stud->select()->where('emp_id',$this->request->getPost('emp_id'))->first();
+            if(isset($user))
+            echo view('dashboard/global-search-staff',$user);
+            else
+                return redirect()->to('/admin-home');
+
+        }
         else
             return redirect()->to('/admin-home');
 
     }
-    else
-        return redirect()->to('/admin-home');
 
-}
+    // public function Notify()
+    // {   
+    //     $notify=new HomeModel();
+    //     // if()
+    //     // {
 
-public function Notify()
-{   
-    $notify=new HomeModel();
-    // if()
-    // {
+    //     // }
+    //     // elseif()
+    //     // {
 
-    // }
-    // elseif()
-    // {
+    //     // }
 
     // }
 
-}
+    public function addAdmissionlog()
+    {
+        if($this->request->getMethod()=='post')
+        {
+            if($this->request->getVar('course')!==NULL and $this->request->getVar('year')!==NULL)
+            {
+                $session=session();
+                $course=new Course();
+                $course_get=$this->request->getVar('course');
+                $year=$this->request->getVar('year');
+                $data_course=$course->select()->where('course_id',$course_get)->first();
+                $logger=new Admissionstat();
+                if(!$logger->select()->where(['course_id'=>$course_get,'year'=>$year])->first())
+                {
+                    $logger->save([
+                    'course_id'=>$course_get,
+                    'Course'=>$data_course['course_name'],
+                    'year'=>$year]);
+                    $session->setFlashdata('response','Admitted');
+                    return redirect()->to('/admin-home/adminlog');
+                }
+            else
+                {
+                    $session->setFlashdata('response','Already Exist');
+                    return redirect()->to('/admin-home/adminlog');
+                }
+            }
+            else
+            return redirect()->to('/admin-home/adminlog');
+        }
+        else
+        return redirect()->to('/home');
+    }
+
+
+    public function getAdmissionRq(){
+       if($this->request->getMethod()=='post' and $this->request->getVar('type')==200)
+       {
+           $user_id=$this->request->getVar('id');
+           $ugCourse=new Course();
+           $prevcs=new Stcat();
+           $prev_sub=new Subject();
+           $syllabus=new Syllabus();
+           $guest_del=new GuestModel();
+           $admin_rq=new Admission_rq();
+           $admissionLog=new Admissionstat();
+           $data=$guest_del->select()->where('GID',$user_id)->first();
+           $data['req']=$admin_rq->select()->where('guest_id',$user_id)->first();
+           $data['reqested_cs']=$ugCourse->select()->findAll();
+           $data['prev_stream']=$prevcs->select()->where('UID',$data['prevcat'])->first();
+           $data['prev_sub']=$prev_sub->select()->where('CSID',$data['CSID'])->first();
+           $data['syllabus']=$syllabus->select('Name')->where('CID',$data['prev_syllabus'])->first();
+           echo json_encode($data);
+
+       }
+       elseif ($this->request->getMethod()=="post" and $this->request->getVar('type')==201) {
+           # code...
+           $post_user_id=$this->request->getVar('id');
+           $post_cs=$this->request->getVar('course');
+           $admission=new Enrollment();
+           $guest_del=new GuestModel();
+           $data_guest=$guest_del->select()->where('GID',$post_user_id)->first();
+           if($admission->select()->where(['exroll_no'=>$data_guest['prevreg'],'gphone'=>$data_guest['phone']])->first())
+           {
+               echo json_encode(array('stat'=>1));
+           }
+           else
+           {
+            $admission->insert([
+                'fname'=>$data_guest['fname'],
+                'lname'=>$data_guest['lname'],
+                'dob'=>$data_guest['dob'],
+                'blood_group'=>$data_guest['blood_group'],
+                'address'=>$data_guest['address'],
+                'state'=>$data_guest['state'],
+                'city'=>$data_guest['city'],
+                'zip_code'=>$data_guest['pincode'],
+                'gender'=>$data_guest['gender'],
+                'guard_fname'=>$data_guest['gfname'],
+                'guard_lname'=>$data_guest['glname'],
+                'relation'=>$data_guest['relation'],
+                'gphone'=>$data_guest['phone'],
+                'year_pass'=>$data_guest['year_pass'],
+                'exroll_no'=>$data_guest['prevreg'],
+                'e_mail'=>$data_guest['email'],
+                'ug_course'=>$post_cs,
+                'prevcourse'=>$data_guest['prevcat'],
+                'prev_syllabus'=>$data_guest['prev_syllabus'],
+                'CSID'=>$data_guest['CSID'],
+                'sub1'=>$data_guest['sub1'],
+                'sub2'=>$data_guest['sub2'],
+                'sub3'=>$data_guest['sub3'],
+                'sub4'=>$data_guest['sub4'],
+                'sub5'=>$data_guest['sub5'],
+            ]);
+                    $admit_id=$admission->select('admin_no')->where(['exroll_no'=>$data_guest['prevreg'],'gphone'=>$data_guest['phone']])->first();
+                    $id_post=$admit_id['admin_no'];
+                    $to = "logger@localhost";
+                    $subject = "CASP Admission Completed";
+                    $txt = "
+                    You have succesfully completed CASP admission procedure
+                    Your account has been created, you can login with the following credentials after you have activated your account by setting a password using Password Recovery Portal.
+                    
+                    ------------------------
+                    Admission Number: ".$id_post."
+                    ------------------------
+                    
+                    Please click this link to set a password:
+                    http://localhost//precovery/student-recovery
+                                        
+                    ";
+                    $headers = "From: webmaster@codeIgniter.com" ;
+                    $stat=mail($to,$subject,$txt,$headers);
+            echo json_encode(array('stat'=>0));
+           }
+           
+       }
+       elseif (($this->request->getMethod()=="post" and $this->request->getVar('type')==202)) {
+           # code...
+           $admission_rq=new Admission_rq();
+           $id=$this->request->getVar('id');
+           $stat=$admission_rq->where('application_id',$id)->delete();
+           if(!$stat)
+           echo json_encode(array('stat'=>0));
+           else
+           echo json_encode(array('stat'=>1));
+       }
+        
+    }
 }
 
 ?>

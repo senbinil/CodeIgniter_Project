@@ -1,7 +1,6 @@
 <?php namespace App\Controllers;
 
 use CodeIgniter\Controller;
-use App\Models\StaffSal;
 use App\Models\LoginModel;
 use App\Models\StaffLogin;
 use App\Models\Designation;
@@ -118,21 +117,32 @@ class Login extends BaseController
             $session->setFlashdata('msg','Wrong Username');
             return redirect()->to('/login/admin-login');
         }
-     }
+    }
 
-     public function logout()
+     public function logout($user)
      {
          $session=session();
-         $session->destroy();
-         Return redirect()->to('/home');
+        //  $session->destroy();
+        switch($user){
+            case 'staff':unset($_SESSION['D_staff']);
+                         break;
+            case 'student':unset($_SESSION['student_id']);
+                         break;
+            case 'admin':unset($_SESSION['admin']);
+                        break;
+            case 'guest':uset($_SESSION['guest']);
+                        break;
+            default:uset($session);
+                    break;                   
+        }
+         return redirect()->to('/home');
      }
 
 
      public function staffLogin()
-     {  
+     {   
          $session=session(); 
          $staffLogin=new StaffLogin();
-         $designation=new Designation();
          if($this->request->getMethod()=='post')
          {  
              $username=$this->request->getPost('emp_id');
@@ -145,27 +155,20 @@ class Login extends BaseController
                 if(password_verify($pass,$data['password']))
                 {
                     $staffdetails=new StaffEnrollment();
-                    $staffSal=new StaffSal();
                     $timeMac=new TimeMachine();
                     $timeMac->save([
                         'user_id'=>$username
                     ]);
                  
                     $del=$staffdetails->select()->where('emp_id',$username)->first();
-                    $desig=$designation->select(['pos_name','salary'])->where('pos_id',$del['desig'])->first();
-                    $del['desig_name']=$desig;
-                    $del['salarydel']=$staffSal->select()->where('emp_id',$username)->findAll();
-                    $del['lastsal']=$staffSal->select()->where('emp_id',$username)->orderBy('pay_time','DESC')->first();
                     $ses_data=[
                         'username'=>$del['emp_name'],
                         'logged_in'=>TRUE,
-                        'log_time'=>(int)time(),
-                        'log_exp'=>(int)time()+(30*60)
+                        'D_staff'=>$username,
+                        'sesId'=>session_id()
                     ];
                     $session->set($ses_data);
-                    $mindata['timedata']=$timeMac->select(['time_jumpid','timelog'])->where('user_id',$username)->orderBy('timelog','DESC')->findAll(10);
-                    echo view('landing/header',$mindata);
-                    echo view('landing/staff',$del);
+                    return redirect()->to('/staff/home');
                 }
                 else{
                     $session->setFlashdata('msg','Wrong username or Password');
@@ -185,7 +188,7 @@ class Login extends BaseController
 
      public function studLogin()
      {
-         $session=session();
+        $session=session(); 
          $log_chk=new studlogin();
          $txt=password_hash('pass123',PASSWORD_DEFAULT);
          
@@ -205,18 +208,15 @@ class Login extends BaseController
                     ]);
             
                     $data_dump=$studentdump->select()->where('admin_no',$user)->first();
-                    $cs_id=$data_dump['ug_course'];
-                    $course=new Course();
-                    $data_dump['course_dump']=$course->select(['course_name','no_sem','sem_fee'])->where('course_id',$cs_id)->first();
                     $ses_data=[
                         'username'=>$data_dump['fname'].$data_dump['lname'],
                         'logged_in'=>TRUE,
-                        'log_time'=>(int)time(),
-                        'log_exp'=>(int)time()+(30*60)
+                        'student_id'=>$user,
+                        'sesId'=>session_id()
+
                     ];
                     $session->set($ses_data);
-                    echo view('landing/header');
-                    echo view('landing/student',$data_dump);
+                    return redirect()->to('/student/home');
                 }
                 else
                 {
