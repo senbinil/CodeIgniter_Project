@@ -10,7 +10,7 @@ class Guest implements FilterInterface
     {
         
       
-           if(!session()->get('logged_in') and !isset($_SESSION['guest']))
+           if(!isset($_SESSION['gid']))
            {
                return redirect()->to('/home');
            }

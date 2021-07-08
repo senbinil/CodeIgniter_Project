@@ -135,10 +135,10 @@
                     <td>".$adminlog[$i]['Course']."</td>
                     <td>".$adminlog[$i]['year']."</td>";
                     if($adminlog[$i]['status'])
-                   echo" <td><button type=\"button\" class=\"btn btn-primary ml-2 btn-sm\" name=\"button\" disabled>Active</button> <button type=\"button\" class=\"btn btn-primary mx-2  btn-danger btn-sm\">Disable</button></td>
+                   echo" <td><button type=\"button\" class=\"btn btn-primary ml-2 btn-sm\" name=\"button\" disabled>Active</button> <button type=\"button\" onclick=\"adminDisable(".$adminlog[$i]['admitID'].")\" class=\"btn btn-primary mx-2  btn-danger btn-sm\">Disable</button></td>
                     </tr>";
                     else
-                    echo" <td><button type=\"button\" class=\"btn btn-primary ml-2 btn-sm\" name=\"button\" disabled>Inactive</button></td>
+                    echo" <td><button type=\"button\"  class=\"btn btn-primary ml-2 btn-sm\" name=\"button\" disabled>Inactive</button></td>
                     </tr>";
                 }
             }
@@ -150,7 +150,35 @@
 
   </div>
 </div>
+<script>
+function adminDisable(admissionLogid)
+{
+  console.log(Number(admissionLogid));
+  if(confirm("Are you sure to Disable this entry?") && admissionLogid!=='')
+  {
+    $.ajax({
+      url:'/dashboard/admissionEntryControl',
+      type:'POST',
+      data:{
+        id:Number(admissionLogid)
+      },
+      cache:false,
+      success:function(result){
+        var data=JSON.parse(result);
+        console.log(data);
+        if(data)
+        {
+          alert("Processed");
+          location.replace("/admin-home/adminlog");
+        }
+        else
+        alert("Error occurred");
+      }
+    });
+  }
 
+}
+</script>
 <script src="/asset/js/popper.min.js"></script>
 </body>
 </html>

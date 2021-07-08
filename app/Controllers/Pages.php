@@ -3,6 +3,9 @@
 use App\Models\HomeModel;
 use CodeIgniter\Controller;
 use App\Models\Suggestion;
+use App\Models\Enrollment;
+use App\Models\Course;
+
 class Pages extends Controller
 {   
     
@@ -55,6 +58,11 @@ class Pages extends Controller
                                 echo view('pages/gallery');
                                 echo view('templates/footer');
                                 break;
+                case 'blood': echo view('templates/header');
+                                echo view('templates/body');
+                                echo view('pages/blood');
+                                echo view('templates/footer');
+                                break;
                 default:return redirect()->to('/home');
             }
      
@@ -91,6 +99,26 @@ class Pages extends Controller
             else
                 echo json_encode(array('stat'=>0));
         }
+        elseif ($this->request->getMethod()=='post' and $this->request->getPost('type')==3) {
+            # code...
+            $blod=$this->request->getVar('bgroup');
+            $studDel=new Enrollment();
+            $cs=new Course();
+            try{
+                $data['student']=$studDel->select(['fname','lname','ug_course','semester'])->where('blood_group',$blod)->findAll(10);
+                if(\count($data['student'])==0)
+                return json_encode(array('stat'=>0));
+                for($i=0;$i<=count($data);$i++)
+                $data['cs'][$i]=$cs->select('course_name')->where('course_id',$data['student'][$i]['ug_course'])->first();
+                echo json_encode($data);
+            }
+            catch(Exception $e)
+            {
+                echo 0;
+            }
+        }
+        else
+         return redirect()->to('/home');
 
     }
 }

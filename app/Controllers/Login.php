@@ -130,9 +130,9 @@ class Login extends BaseController
                          break;
             case 'admin':unset($_SESSION['admin']);
                         break;
-            case 'guest':uset($_SESSION['guest']);
+            case 'guest':unset($_SESSION['gid']);
                         break;
-            default:uset($session);
+            default:unset($session);
                     break;                   
         }
          return redirect()->to('/home');
@@ -280,7 +280,6 @@ class Login extends BaseController
                 ]);
                 $ses_data=[
                     'logged_in'=>TRUE,
-                    'guest'=>TRUE,
                     'gid'=>$username,
                     'filled'=>FALSE,
                     'email'=>$guestlogin['email'],
@@ -298,7 +297,6 @@ class Login extends BaseController
                 ]);
                 $ses_data=[
                     'logged_in'=>TRUE,
-                    'guest'=>TRUE,
                     'gid'=>$username,
                     'filled'=>TRUE,
                    

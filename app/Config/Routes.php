@@ -57,6 +57,7 @@ $routes->match(['get', 'post'], 'dashboard/announce', 'Dashboard::announce',['fi
 $routes->match(['get', 'post'], 'dashboard/admissionEntry', 'Dashboard::addAdmissionlog',['filter'=>'auth']);
 $routes->match(['get', 'post'], 'dashboard/fee-collector/(:segment)', 'Dashboard::feeMod/$1',['filter'=>'auth']);
 $routes->match(['get', 'post'], 'dashboard/getReq', 'Dashboard::getAdmissionRq',['filter'=>'auth']);
+$routes->match(['get', 'post'], 'dashboard/admissionEntryControl', 'Dashboard::disableAdmissionEntry',['filter'=>'auth']);
 
 
 $routes->match(['get', 'post'], 'login/stafflogin', 'Login::staffLogin');
@@ -68,10 +69,11 @@ $routes->match(['get', 'post'], 'login/auth', 'Login::auth');
 $routes->match(['get','post'],'/common/Payment','Common::getFee',['filter'=>'common']);
 $routes->match(['get','post'],'/common/fileSubmit','Common::addFile',['filter'=>'common']);
 $routes->match(['get', 'post'], 'common/Search/(:segment)', 'Common::getDetails/$1',['filter'=>'common']);
-$routes->match(['get','post'],'/library/Viewer','Common::viewer',['filter'=>'common']);
+$routes->match(['get','post'],'/library/Viewer','Common::viewer',['filter'=>'dauth']);
 $routes->get('/common/(:segment)','Common::Pagger/$1',['filter'=>'common']);
 $routes->get('/common/resources/library','Common::Pagger/browseLib',['filter'=>'dauth']);
-
+$routes->match(['get','post'],'/library/useraddFile','Common::UseraddFile',['filter'=>'dauth']);
+$routes->match(['get','post'],'/library/fileApprove','Common::tempFile',['filter'=>'common']);
 
 $routes->get('faculty/(:segment)','Faculty::Pagger/$1',['filter'=>'fauth']);
 $routes->match(['get', 'post'], 'user/log_fetch', 'Login::getLog',['filter'=>'dauth']);

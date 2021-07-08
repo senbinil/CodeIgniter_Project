@@ -17,7 +17,7 @@
         <img src="asset/img/1_KJACFKJ0GKtnhgR7OmlPFA.gif" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">Blood Bank</h5>
-          <a href="blod.php" class="btn btn-primary">Enter</a>
+          <a href="/blood" class="btn btn-primary">Enter</a>
         </div>
       </div>
   </div>

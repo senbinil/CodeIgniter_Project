@@ -48,11 +48,11 @@
             <div class="d-flex justify-content-center pt-4">
             <form class="form" action="/login/studentlogin" method="post">
               <div class="row">
-                <input type="text"  class="form-control text-center "  style="width:300px;"  name="adminno" placeholder="Username" id="">
+                <input type="text"  class="form-control text-center " required  style="width:300px;"  name="adminno" placeholder="Username" id="">
               </div>
               <br>
               <div class="row">
-                <input type="password" name="pass" class="form-control text-center" placeholder="Password" id="">
+                <input type="password" name="pass" class="form-control text-center" required placeholder="Password" id="">
               </div>
               <div class="row d-flex justify-content-end">
                 <div class="recover">

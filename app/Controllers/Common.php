@@ -156,7 +156,101 @@ class Common extends Controller
 
     }
 
-     
+     public function UseraddFile()
+     {
+         if($this->request->getMethod()=='post' and $this->request->getVar('type')==501)
+         {        
+            $file=$this->request->getFile('file');
+            $target_file =  basename($file->getName());
+            $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+            
+                $hashed_file=sha1_file($file->getTempName());
+                $fileintro=$this->request->getVar('fileIntro');
+                $cat=$this->request->getVar('cat');
+                $libModel=new Library();
+                if($libModel->select('fileHash')->where('fileHash',$hashed_file)->first())
+                {
+                  return json_encode(array('stat'=>-1));
+                }
+                $category=array('1'=>"Note",'2'=>'Syllabus','3'=>'Book','4'=>"other");
+                $check = filesize($file->getTempName());
+                if($check<52428800 and $imageFileType==="pdf")
+                {
+                    $newfileName=(string)$hashed_file;
+                    if($libModel->insert([
+                        'fileintro'=>$fileintro,
+                        'cat'=>$category[$cat],
+                        'fileHash'=>$hashed_file,
+                        'stat'=>0
+                    ]))
+                    {
+                        $file->move('asset/upload/temp'.'/',$hashed_file.'.pdf');
+                        return  json_encode(array('stat'=>1));
+
+                    }
+                    else
+                    return json_encode(array('stat'=>-1));
+
+                }
+                else
+                echo json_encode(array('stat'=>0));
+        }
+        else
+        return redirect()->to('/home');
+
+     }
+
+     public function tempFile()
+     {
+        $library=new Library();
+         if($this->request->getMethod()=='post' and $this->request->getVar('type')==502)
+         {
+             $content=$library->select()->where('stat',0)->findAll(20);
+             echo json_encode($content);
+         }
+         elseif ($this->request->getMethod()=='post' and $this->request->getVar('type')==503) 
+         {
+             # code...
+             $data=[
+                 'stat'=>1
+             ];
+             if($fileDetials=$library->select()->where('upload_id',$this->request->getVar('id'))->first())
+             {
+                 $path="asset/upload/temp/".$fileDetials['fileHash'].".pdf";
+                 try{
+                    $fileHandle = new \CodeIgniter\Files\File($path,TRUE);
+                    $fileHandle->getSizeByUnit();
+                    $fileHandle->move("asset/upload/".$fileDetials['cat']."/");
+                    $library->set($data)->where('upload_id',$this->request->getVar('id'))->update();
+                    echo json_encode(array('stat'=>1));
+                 }
+                 catch(\Exception $e)
+                 { 
+                     echo json_encode(array('stat'=>0));
+                 }
+             }
+         }
+         elseif ($this->request->getMethod()=='post' and $this->request->getVar('type')==504) {
+             # code...
+             try{
+                 if($fileDetials=$library->select()->where('upload_id',$this->request->getVar('id'))->first())
+                 {  if(unlink("asset/upload/temp/".$fileDetials['fileHash'].".pdf"))
+                     $library->where('upload_id',$this->request->getVar('id'))->delete();
+                     echo json_encode(array('stat'=>1));
+                 }
+                 else
+                 echo json_encode(array('stat'=>0));
+             }
+             catch(\Exception $e)
+             {
+                echo json_encode(array('stat'=>0));
+             }
+         }
+         else
+         return redirect()->to('/home');
+        
+         
+     }
 }
 
 

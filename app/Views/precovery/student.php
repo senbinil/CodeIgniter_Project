@@ -127,8 +127,7 @@ Why  i am on this page ?</h5><br>
 
 
 
-    <footer class="footer  py-5 page-footer text-light  font-small pt-4" style="background: rgb(9,9,121);
-background: linear-gradient(248deg, rgba(9,9,121,1) 35%, rgba(4,121,196,1) 38%);">
+    <footer class="footer  py-5 page-footer text-light  font-small pt-4" style="background-color:#393E46">
 
         <!-- Footer Links -->
         <div class="container-fluid text-center text-md-left">
@@ -152,9 +151,9 @@ background: linear-gradient(248deg, rgba(9,9,121,1) 35%, rgba(4,121,196,1) 38%);
             <hr class="clearfix w-100 d-md-none ">
       
             <!-- Grid column -->
-            <div class="col-md-3 mb-md-0 mb-3">
+            <!-- <div class="col-md-3 mb-md-0 mb-3">
       
-              <!-- Links -->
+             
               <h5 class="text-uppercase">Login</h5>
        
               <ul class="list-unstyled">
@@ -167,7 +166,7 @@ background: linear-gradient(248deg, rgba(9,9,121,1) 35%, rgba(4,121,196,1) 38%);
              
               </ul>
       
-            </div>
+            </div> -->
             <!-- Grid column -->
       
             <!-- Grid column -->

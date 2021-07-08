@@ -42,7 +42,7 @@ class Dashboard extends Controller
         $desig['content']=$designation->select(['pos_id','pos_name'])->findAll();
         $data['username']=$session->get('user_id');
         $admissionlog=new Admissionstat();
-        $admissionContent['adminlog']=$admissionlog->select()->findAll(10);
+        $admissionContent['adminlog']=$admissionlog->select()->orderBy('status','DESC')->findAll(10);
         $admin_rq=new Admission_rq();
         $data['admission_rq']=$admin_rq->select()->orderBy('timelog','DESC')->findAll(20);
 
@@ -319,10 +319,19 @@ class Dashboard extends Controller
                     $session->setFlashdata('response','Admitted');
                     return redirect()->to('/admin-home/adminlog');
                 }
-            else
+                else
                 {
-                    $session->setFlashdata('response','Already Exist');
-                    return redirect()->to('/admin-home/adminlog');
+                    if($logger->select()->where(['course_id'=>$course_get,'status'=>0])->first())
+                    {
+                        $logger->where(['course_id'=>$course_get,'year'=>$year])->set('status',1)->update();
+                        $session->setFlashdata('response','Updated');
+                        return redirect()->to('/admin-home/adminlog');
+                    }
+                    else
+                    {
+                        $session->setFlashdata('response','Already Exist');
+                        return redirect()->to('/admin-home/adminlog');
+                    }
                 }
             }
             else
@@ -365,8 +374,10 @@ class Dashboard extends Controller
                echo json_encode(array('stat'=>1));
            }
            else
-           {
-            $admission->insert([
+           {   $admissionLog=new Admissionstat();
+                $data_log=$admissionLog->select()->where('course_id',$post_cs)->first();
+               if($data_log['allotted']<=$data_log['seat_no'])
+                $admission->insert([
                 'fname'=>$data_guest['fname'],
                 'lname'=>$data_guest['lname'],
                 'dob'=>$data_guest['dob'],
@@ -392,7 +403,14 @@ class Dashboard extends Controller
                 'sub3'=>$data_guest['sub3'],
                 'sub4'=>$data_guest['sub4'],
                 'sub5'=>$data_guest['sub5'],
+                'admit_year'=>date('Y')
             ]);
+                    else{
+                        return   json_encode(array('stat'=>1));
+
+                    }
+                    $update_data=['allotted'=>++$data_log['allotted']];
+                    $admissionLog->set($update_data)->where('course_id',$post_cs)->update();
                     $admit_id=$admission->select('admin_no')->where(['exroll_no'=>$data_guest['prevreg'],'gphone'=>$data_guest['phone']])->first();
                     $id_post=$admit_id['admin_no'];
                     $to = "logger@localhost";
@@ -425,6 +443,19 @@ class Dashboard extends Controller
            else
            echo json_encode(array('stat'=>1));
        }
+        
+    }
+
+    public function disableAdmissionEntry()
+    {
+        $myModel=new Admissionstat();
+        try{
+            $myModel->where('admitID',$this->request->getVar('id'))->set('status',0)->update();
+            echo 1;
+        }
+        catch( Exception $e){
+            echo 0;
+        }
         
     }
 }

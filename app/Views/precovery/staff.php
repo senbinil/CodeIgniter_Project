@@ -124,7 +124,7 @@ Why  i am on this page ?</h5><br>
 
 
 
-    <footer class="footer  py-5 page-footer text-dark bg-light font-small pt-4">
+    <footer class="footer  py-5 page-footer text-white  font-small pt-4"  style="background-color:#393E46">
 
         <!-- Footer Links -->
         <div class="container-fluid text-center text-md-left">
@@ -151,7 +151,7 @@ Why  i am on this page ?</h5><br>
             <div class="col-md-3 mb-md-0 mb-3">
       
               <!-- Links -->
-              <h5 class="text-uppercase">Login</h5>
+              <!-- <h5 class="text-uppercase">Login</h5>
        
               <ul class="list-unstyled">
                 <li>
@@ -163,7 +163,7 @@ Why  i am on this page ?</h5><br>
              
               </ul>
       
-            </div>
+            </div> -->
             <!-- Grid column -->
       
             <!-- Grid column -->

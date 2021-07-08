@@ -2,13 +2,12 @@
   <div class="container " style="margin-top:100px;">
       <div class="row">
           <div class="col-sm-8">
-              <h3 class="mb-5">#About Us</h3>
+              <h3 class="my-2">#About Us</h3>
               <p class="text-justify">The College of  Applied Science Perissery established in 2015, is affiliated to the University of Kerala and is  managed by the  Institute for Human Resources Development, Thiruvananthapuram, a Government of Kerala undertaking popularly known as the IHRD in the Kerala higher education sector.The college has a modest beginning with two First Degree Programmes in English and Commerce and two Career-related First Degree Programmes in Computer Application and Computer Science.  College of Applied Science,
                  Perissery is an affiliated institution of the University of Kerala and is managed by IHRD, a Govt. of Kerala institution.
                   </p>
-            
-                  <br>
-                  <img src="asset/img/map.PNG" width="700px" style="overflow: hidden;" class="img-fluid mb-4" class="mb-4 col-sm-8" alt=""><br>
+                  <iframe width="100%" height="600"  class="my-4" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDXG-9f2p8DlTx7Vz661isFrdA_1hUpF7U&q=IHRD+Perissery+Chengannur+Kerala&zoom=13"></iframe>
+                  <!-- <img src="asset/img/map.PNG" width="700px" style="overflow: hidden;" class="img-fluid mb-4" class="mb-4 col-sm-8" alt=""><br> -->
                   Courses  Affiliated to University of Kerala
                   <ul class="my-3">
                     <li>B.Sc Computer Science(30 seats) 3 year undergraduate programme</li>

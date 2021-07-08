@@ -50,7 +50,7 @@ background: linear-gradient(to right, #333399, #ff00cc); /* W3C, IE 10+/ Edge, F
                             aria-haspopup="true" aria-expanded="false"><i class="fa fa-user mx-2"></i><span>Guest</span>
                         </a>
                         <div class="dropdown-menu">
-                            <a href="/logout" class="dropdown-item">Logout</a>
+                            <a href="/logout/guest" class="dropdown-item">Logout</a>
                         </div>
                     </li>
                 </ul>
@@ -178,15 +178,43 @@ background: linear-gradient(to right, #333399, #ff00cc); /* W3C, IE 10+/ Edge, F
           </div>
       </div>
         <div class="col-md-4 mt-sm-2">
-          <div class=" rounded   text-light" style="font-size:20px;height:300px;background-image: radial-gradient( circle farthest-corner at 10.9% 80.2%,  rgba(255,124,0,1) 0%, rgba(255,124,0,1) 15.9%, rgba(255,163,77,1) 15.9%, rgba(255,163,77,1) 24.4%, rgba(19,30,37,1) 24.5%, rgba(19,30,37,1) 66% );">
+          <div class=" rounded   text-light" style="background-image: radial-gradient( circle farthest-corner at 10.9% 80.2%,  rgba(255,124,0,1) 0%, rgba(255,124,0,1) 15.9%, rgba(255,163,77,1) 15.9%, rgba(255,163,77,1) 24.4%, rgba(19,30,37,1) 24.5%, rgba(19,30,37,1) 66% );">
             <h4 class=" text-center text-center py-2"> Library</h4>
             <hr class="bg-white">
             <div class="row  text-dark mx-4">
               <ul>
-                <li class="nav-link my-4"> <a href="" class="text-white">Browse</a> </li>
-                <li class="nav-link my-4 "><a href="" class="text-white">Submit Material</a></li>
+                <li class="nav-link my-4"><h5><i class="fa fa-folder-open text-white"></i> <a href="/common/resources/library" class="text-white">Browse</a></h5> </li>
               </ul>
             </div>
+            <hr class="bg-white">
+        <div class="fileLoad text-center py-4">
+          <div class="row d-flex justify-content-center  my-3 py-4 mx-2">
+            <label class="col-form-label col-md-2">File Description:</label>
+
+            <div class="col">
+              <textarea name="fileintro" class="form-control" required minlength="20" id="filedes" cols="30"
+                rows="2"></textarea>
+            </div>
+          </div>
+          <div class="row d-flex justify-content-center my-3">
+            <select name="cat" class="form-control  required col-md-6" required id="cat">
+              <option value="" selected>Select the category of upload</option>
+              <option value="1">Notes</option>
+              <option value="2">Syllabus</option>
+              <option value="3">Book</option>
+              <option value="4">Other</option>
+            </select>
+          </div>
+          <div class="row d-flex text-left justify-content-center">
+            <div class="custom-file col-md-6 mx-3 my-0">
+              <input type="file" required class="custom-file-input" name="filetoload" id="customFile">
+              <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
+          </div>
+          <div class="row my-3 py-4 d-flex justify-content-center">
+            <input type="submit" name="" value="Submit" id="sub" class="btn btn-danger">
+          </div>
+        </div>
           </div>
         </div>
   </div>
@@ -289,7 +317,57 @@ background: linear-gradient(to right, #333399, #ff00cc); /* W3C, IE 10+/ Edge, F
                   }
 
                 }
+                $(".custom-file-input").on("change", function () {
+    var fileName = $(this).val().split("\\").pop();
+    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+  });
 
+
+
+  $("#cat").on("click", function () {
+    var x = $("#cat option:selected").val();
+    if (x == "") {
+      alert("Please select a category");
+      $("#sub").addClass("disabled");
+    }
+    else
+      $("#sub").removeClass("disabled");
+
+  });
+
+  $('#sub').on('click', function () {
+    var fileIntro = $('#filedes').val();
+    var x = $("#cat option:selected").val();
+    var files = $('.custom-file-input').prop('files')[0];
+    if (fileIntro == "" || x == "" || files == "")
+      alert('Please Fill the submission form');
+    else {
+      var form_data = new FormData();
+      form_data.append('file', files);
+      form_data.append('fileIntro', fileIntro);
+      form_data.append('cat', x);
+      form_data.append('type', 501);
+      $.ajax({
+        url: '/library/useraddFile',
+        type: 'post',
+        data: form_data,
+        contentType: false,
+        processData: false,
+        cache: false,
+        success: function (data) {
+          var res = JSON.parse(data);
+          switch (res.stat) {
+            case 1: $('.fileLoad').html('<span class=" text-danger display-4">File Submitted</span>');
+              break;
+            case 0: $('.fileLoad').html('<span class=" text-danger display-4">Invalid Format</span>');
+              break;
+            case -1: $('.fileLoad').html('<span class=" text-danger display-4">File Exist</span>');
+              break;
+          }
+        }
+      });
+    }
+  });
             </script>
 </body>
 </html>

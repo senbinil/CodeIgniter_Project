@@ -28,7 +28,7 @@
                     <li class="nav-item   mx-3 my-1">
                     <a class="nav-link text-white" href="<?php if(!$_SESSION['admin']) echo "/faculty/home"; else echo "/admin-home";?>">Dashboard Home</a>                    </li>
                     <li class="nav-item  mx-4 my-1">
-                        <a class="nav-link  text-light" href="/logout">Logout</a>
+                        <a class="nav-link  text-light" href="/logout/admin">Logout</a>
                     </li>
                 </ul>
         </div>
@@ -36,7 +36,7 @@
 
     <hr class="my-4">
     
-<div class="container">
+<div class="container-fluid">
     <div class="wrapper">
             <div class="row d-flex justify-content-center">
                 <span class="alert alert-danger"><?php if(isset($_SESSION['stat']))echo $_SESSION['stat'];?></span>
@@ -70,7 +70,7 @@
         </form>
 
 
-        <hr class="py-3 my-3 border border-rounded bg-danger">
+        <hr class="py-3 my-3 border border-rounded bg-light">
         <div class="recent">
             <div class="table-responsive">
                 <table class="table table-borderless">
@@ -81,13 +81,35 @@
                         <th>Action</th>
                         <th>Time</th>
                     </thead>
+                    <tbody id="tempContent">
 
+                    </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>    
 
+
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalContent" aria-hidden="true" id="modalContent">
+    <div role="document" class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalContent">View</h5>
+                <button type="button" data-dismiss="modal"  aria-label="close" class="close">
+                    <span aria-hidden="true">&times;</span>  
+                </button>
+            </div>
+            <div class="modal-body">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate quaerat est rem, dolorum reprehenderit officia consectetur ut, laudantium iusto, similique suscipit veritatis atque temporibus fugiat provident odio sint? Enim, placeat!
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" data-dismiss="modal" type="button">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     // Add the following code if you want the name of the file appear on select
     $(".custom-file-input").on("change", function() {
@@ -105,7 +127,81 @@
         else
         $("#sub").removeClass("disabled");
 
-    })
+    });
+
+$(document).ready(function(){
+    $.ajax({
+        url:'/library/fileApprove',
+        type:'POST',
+        data:{
+            type:502
+        },
+        cache:false,
+        success:function(data){
+            var res=JSON.parse(data);
+            if(res.length>0){
+            for(var i=0;i<res.length;i++)
+            {
+                // var x={fileintro:res[i]['fileIntro'],fileHash:res[i]['fileHash']};
+                // console.log(x);
+                // views(x);
+            $('#tempContent').append("<tr class=\"bg-light\"><td>"+res[i]['fileIntro']+"</td><td>"+res[i]['cat']+"</td><td><button class=\"btn btn-info btn-sm m-1\" data-toggle=\"modal\" onclick=\"views(this.value)\"    value=\""+res[i]['fileHash']+"\" data-target=\"#modalContent\">View</button><button class=\"btn btn-success m-1 btn-sm\" onclick=\"approve(this.value)\" value=\""+res[i]['upload_id']+"\">Approve</button><button class=\"btn btn-danger m-1 btn-sm\" onclick=\"deleteMe(this.value)\" value=\""+res[i]['upload_id']+"\">Delete</button></td><td>"+res[i]['timelog']+"</td></tr>")
+            }
+            }
+        }
+    });
+});
+
+function views(arg)
+{
+    $(".modal-body").html("<iframe src = \"\/asset\/ViewerJS\/#..\/upload\/temp\/"+arg+".pdf\" width=\'100%\' height=\'800\' allowfullscreen webkitallowfullscreen></iframe>");
+}
+
+function approve(id)
+{
+    if(confirm("Approve file submission ?"))
+    {
+        $.ajax({
+            url:'/library/fileApprove',
+            type:'POST',
+            data:{
+                type:503,
+                id:id
+            },
+            cache:false,
+            success:function(data){
+                var res=JSON.parse(data);
+                if(res.stat)
+                location.reload();
+                else
+                alert("Error occured please try again");
+            }
+        });
+    }
+}
+
+function deleteMe(id)
+{
+    if(confirm("Delete file submission ?"))
+    {
+        $.ajax({
+            url:'/library/fileApprove',
+            type:'POST',
+            data:{
+                type:504,
+                id:id
+            },
+            cache:false,
+            success:function(data){
+                var res=JSON.parse(data);
+                if(res.stat)
+                location.reload();
+                else
+                alert("Error occured please try again");
+            }
+        });
+    }
+}
 
     </script>
 <script src="<?=base_url()?>/asset/js/popper.min.js"></script>

@@ -10,7 +10,7 @@
     <script src="<?= base_url();?>/asset/js/bootstrap.min.js" ></script>
     <link href="<?= base_url();?>/asset/css/bootstrap.css" rel="stylesheet" >
     <link rel="stylesheet" href="/asset/css/common.css">
-
+    <script src="/asset/js/chart.js"></script>
     <title>DashBoard</title>
     
     <style>
@@ -57,6 +57,12 @@ body{
          text-decoration: none !important;
          color: white !important;
      }
+     canvas{
+
+        width:300px !important;
+        height:300px !important;
+
+}
     </style>
 </head>
 <body>
@@ -88,8 +94,11 @@ body{
         </div>
     </nav>
 
+<!-- <h2 class=" text-dark">Chart.js — Pie Chart Demo</h2><br>
 
-
+<div class="chart-container" >
+    <canvas id="myChart" ></canvas>
+</div> -->
 
 <section>
     <div id="accordion mb-4">
@@ -345,9 +354,9 @@ body{
                         <div class="col-md-3 col-xs-6">
                             <a href="admin-home/staff-enroll" class="nav-link">Enrollment</a>
                         </div>
-                        <div class="col-md-3 col-xs-6">
+                        <!-- <div class="col-md-3 col-xs-6">
                             <a href="#" class="nav-link">Salary</a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -389,7 +398,29 @@ window.onpopstate = function() {
     window.history.pushState(null, "", window.location.href);
 
 };
-
+var ctx = document.getElementById("myChart").getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["Allocated","Available"],
+      datasets: [{
+        backgroundColor: [
+          "#2ecc71",
+          "#3498db",
+          "#95a5a6",
+          "#9b59b6",
+          "#f1c40f",
+          "#e74c3c",
+          "#34495e"
+        ],
+        data: [1,29]
+      }]
+    },
+    options: {
+    responsive: false,
+    maintainAspectRatio: true,
+}
+  });
 });
 
 function tryMe()

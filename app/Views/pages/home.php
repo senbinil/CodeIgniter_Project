@@ -4,7 +4,7 @@
             <div class="text-block jumbotron-fluid bg-transparent ">
               <span class="  display-3 ">College Of Applied Science, Perissery</span>
               <p class="lead mb-5 text-white-50">
-              <a href="about" class="btn btn-dark btn-lg">Read More</a>
+              <a href="about" class="btn btn-primary btn-lg">Read More</a>
             </p>
             </div>
             <canvas class="background"></canvas>
@@ -15,7 +15,7 @@
           <div class="container container-fluid-sm cont" >
           <div class="row bg-transparent p-1" >
             
-            <div class="col-sm-8 card border border-light  text-white py-4" style="background-color: #4158D0;background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);">
+            <div class="col-sm-8 card border border-light text-white   py-4" style="background-color:#393E46">
               <section>
                 <h2>Upcoming Events</h2><br>
                 <hr class="bg-white">
@@ -49,7 +49,7 @@
               </section>
             </div>
             <div class="col-sm-4 news border  border " style="overflow: hidden; min-height:400px;">
-          <div class=" bg-dark text-white " style="background-image: linear-gradient(to right, #FF512F 0%, #DD2476  51%, #FF512F  100%)">
+          <div class=" bg-dark text-white " style="background-color:#393E46">
             <h4 align="center">News</h4>
           </div>
 
@@ -61,7 +61,7 @@
             if (isset($msg)) {
               // output data of each row
               for($i=0;$i<count($msg) ;$i++)
-              echo  '<li class="font-weight-bold card-body border bg-light" style="background-image: linear-gradient(to right, #1FA2FF 0%, #12D8FA  51%, #1FA2FF  100%);
+              echo  '<li class="font-weight-bold card-body border" style="background:#FF6237;
                  text-align: center;
                  text-transform: uppercase;
                  transition: 0.5s;
@@ -87,7 +87,7 @@
      
 
         <div class="container text-white   mt-5" >
-         <section class=" card px-1 py-1 border border-light  fadeIn" style="background-color: #4158D0;background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);">
+         <section class=" card px-1 py-1 border border-light  fadeIn"  style="background-color:#393E46">
           <div class="row">
             <div class="col-md-6">
               <img src="asset/img/idea.jpg"  class="img-fluid z-depth-1-half" alt="">
@@ -106,7 +106,8 @@
           </div>
          </section>
          <hr class="my-5">
-         <section class="card  px-1 py-1" style="background-color: #4158D0;background-image: linear-gradient(122deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);">
+         <section class="card  px-1 py-1"  style="background-color:#393E46">
+         <!-- style="background-color: #4158D0;background-image: linear-gradient(122deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);" -->
            <h3 class="text-center mb-5">
              About
            </h3>

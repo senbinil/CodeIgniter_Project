@@ -29,9 +29,9 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item   mx-3 my-1">
-                    <a class="nav-link text-info" href="<?php if(isset($_SESSION['admin'])){if(!$_SESSION['admin']) echo "/faculty/home"; else echo "/admin-home";} if(isset($_SESSION['student_id'])) echo '/student/home';else echo'/guest/home/';?>">Dashboard Home</a>                    </li>
+                    <a class="nav-link text-info" href="<?php if(isset($_SESSION['admin'])){if($_SESSION['admin'])echo "/admin-home"; else echo "/faculty/home"; } if(isset($_SESSION['D_staff']))echo "/staff/home"; if(isset($_SESSION['student_id'])) echo '/student/home';if(isset($_SESSION['guest'])) echo'/guest/profile';?>">Dashboard Home</a>                    </li>
                     <li class="nav-item  mx-4 my-1">
-                        <a class="nav-link  text-info" href="/logout/<?php if(isset($_SESSION['admin']))echo'admin'; if(isset($_SESSION['student_id'])) echo 'student';else echo'guest';?>">Logout</a>
+                        <a class="nav-link  text-info" href="/logout/<?php if(isset($_SESSION['admin']))echo'admin'; if(isset($_SESSION['student_id'])) echo 'student';if(isset($_SESSION['D_staff']))echo 'staff';else echo'guest';?>">Logout</a>
                     </li>
                 </ul>
         </div>

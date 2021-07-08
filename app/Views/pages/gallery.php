@@ -1,3 +1,7 @@
+<link rel="stylesheet" href="/asset/css/lightgallery-bundle.min.css">
+<script src="/asset/js/lightgallery.umd.js" charset="utf-8"></script>
+<script src="/asset/js/lg-thumbnail.umd.js"></script>
+<script src="/asset/js/lg-zoom.umd.js"></script>
 <style>
 body{
  background: #C6FFDD;  /* fallback for old browsers */
@@ -5,75 +9,43 @@ background: -webkit-linear-gradient(to left, #f7797d, #FBD786, #C6FFDD);  /* Chr
 background: linear-gradient(to left, #f7797d, #FBD786, #C6FFDD); 
 }
 .wrapper{
-    .min-height:100vh;
+    min-height:100vh;
     margin-top:100px;
 }
 </style>
 
-<hr class="bg-white">
 <div class="wrapper ">
-  <div class="container">
-    <div id="carouselExampleFade" class="carousel  slide carousel-fade" data-ride="carousel">
-    <div class="carousel-inner" role="listbox">
-      <div class="carousel-item active">
-        <img src="asset/img/gal1.jpg" class="d-block img-fluid w-100" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-           <h5>INDUSTRIAL </h5>
-           <p>IV 2019</p>
-         </div>
-      </div>
-      <div class="carousel-item">
-        <img src="asset/img/gal2.jpg" class="d-block img-fluid w-100" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-           <h5>INAGURATION </h5>
-           <p>COLLEGE INAGURATION 2015</p>
-         </div>
-      </div>
-      <div class="carousel-item">
-        <img src="asset/img/gal5.jpg" class="d-block img-fluid w-100" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-           <h5>NSS CAMP </h5>
-           <p>NSS CAMP 2020</p>
-         </div>
-      </div>
-    </div>
-    <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
-  </div>
-  </div>
+<div class="gallery-container row d-flex align-items-center justify-content-center" id="gallery-container">
 
-  <hr class="bg-white  py-4">
-  <div class="row mx-3 ">
-    <div class="card mb-3 rounded col-md-6">
-    <img src="asset/img/gal6.jpg" class="card-img-top my-2" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Black Board</h5>
-    </div>
-  </div>
-  <div class="card mb-3 rounded col-md-6">
-  <img src="asset/img/gal7.webp" class="card-img-top my-2" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Students</h5>
-  </div>
-</div>
-<div class="card mb-3 rounded col-md-6">
-<img src="asset/img/gal8.jpg" class="card-img-top my-2" alt="...">
-<div class="card-body">
-  <h5 class="card-title">Library</h5>
-</div>
-</div>
-<div class="card mb-3 rounded col-md-6">
-<img src="asset/img/gal9.webp" class="card-img-top my-2" alt="...">
-<div class="card-body">
-  <h5 class="card-title">Notebook</h5>
+<a data-lg-size="1400-1400" class="gallery-item mx-1" data-src="/asset/img/gal1.jpg" data-sub-html="<h4>Photo: INDUSTRIAL IV 2019</h4> ">
+  <img class="img-fluid" src="/asset/img/gal1.jpg"  width="400px"/>
+</a>
+<a data-lg-size="1400-1400" class="gallery-item mx-1" data-src="/asset/img/gal2.jpg" data-sub-html="<h4>Photo: COLLEGE INAGURATION</h4> ">
+  <img class="img-fluid" src="/asset/img/gal2.jpg"  width="400px"/>
+</a>
+<a data-lg-size="1400-1400" class="gallery-item mx-1" data-src="/asset/img/gal5.jpg" data-sub-html="<h4>Photo: COLLEGE NSS CAMP 2020</h4> ">
+  <img class="img-fluid" src="/asset/img/gal5.jpg"  width="400px"/>
+</a>
+<a data-lg-size="1400-1400" class="gallery-item mx-1" data-src="/asset/img/gal6.jpg" data-sub-html="<h4>Photo: BlackBoard</h4> ">
+  <img class="img-fluid" src="/asset/img/gal6.jpg"  width="400px"/>
+</a>
+<a data-lg-size="1400-1400" class="gallery-item mx-1" data-src="/asset/img/gal7.webp" data-sub-html="<h4>Photo: Students</h4> ">
+  <img class="img-fluid" src="/asset/img/gal7.webp"  width="400px"/>
+</a>
+<a data-lg-size="1400-1400" class="gallery-item mx-1" data-src="/asset/img/gal8.jpg" data-sub-html="<h4>Photo: Library</h4> ">
+  <img class="img-fluid" src="/asset/img/gal8.jpg"  width="400px"/>
+</a>
+<a data-lg-size="1400-1400" class="gallery-item mx-1" data-src="/asset/img/gal9.webp" data-sub-html="<h4>Photo: Books</h4> ">
+  <img class="img-fluid" src="/asset/img/gal9.webp"  width="400px"/>
+</a>
 </div>
 </div>
-  </div>
 
-</div>
+
+<script type="text/javascript">
+  lightGallery(document.getElementById("gallery-container"), {
+  speed: 500,
+    plugins: [lgThumbnail,lgZoom]
+});
+
+</script>
