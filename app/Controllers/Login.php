@@ -29,6 +29,8 @@ class Login extends BaseController
             case 'admin-login':echo view('login/admin-login');
                                 break;
             case 'guest-login':echo view('templates/header');
+            session();
+            var_dump($_SESSION);
                                 echo view('resources/guest-login-style');
                                 echo view('templates/body');
                                 echo view('login/guest-login');
@@ -125,12 +127,16 @@ class Login extends BaseController
         //  $session->destroy();
         switch($user){
             case 'staff':unset($_SESSION['D_staff']);
+                         session()->destroy();
                          break;
             case 'student':unset($_SESSION['student_id']);
+            session()->destroy();
                          break;
             case 'admin':unset($_SESSION['admin']);
+            session()->destroy();
                         break;
             case 'guest':unset($_SESSION['gid']);
+            session()->destroy();
                         break;
             default:unset($session);
                     break;                   
@@ -272,7 +278,7 @@ class Login extends BaseController
             $data_dump=$guestlogin->select()->where(['TID'=>$username,'password'=>$pass])->first();
             $guest=new GuestModel();
             $chk=$guest->select()->where('GID',$username)->first();
-            if(isset($data_dump) and $data_dump['active']==1 and !isset($chk))
+            if(isset($data_dump) and $data_dump['active']==1 and $chk==NULL)
             {
                 $timeMac=new TimeMachine();
                 $timeMac->save([
@@ -282,14 +288,14 @@ class Login extends BaseController
                     'logged_in'=>TRUE,
                     'gid'=>$username,
                     'filled'=>FALSE,
-                    'email'=>$guestlogin['email'],
-                    'phone'=>$guestlogin['phone']
+                    'email'=>$data_dump['email'],
+                    'phone'=>$data_dump['phone']
 
                 ];
                 $session->set($ses_data);
                 return redirect()->to('/guest/fillup');
             }
-            elseif(isset($guest))
+            elseif($chk!=NULL)
             {
                 $timeMac=new TimeMachine();
                 $timeMac->save([
@@ -305,10 +311,10 @@ class Login extends BaseController
                 return redirect()->to('/guest/profile');
 
             }
-            else
-            return redirect()->to('/home');
+                           return redirect()->to('/guest/profile');
+
         }
-        return redirect()->to('/home');
+      
      }
 
    

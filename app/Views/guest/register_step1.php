@@ -29,7 +29,7 @@ background-image: linear-gradient(0deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);"
 <div class="wrapper">
   <div class="sec">
   <h3 class="text-center text-white display-4 my-4">Fill up</h3>
-  <div class="d-flex justify-content-end my-2" style="margin-left:60px;margin-right:60px;"><button class="btn btn-lg btn-danger mx-4 text-white"><a class="nav-item text-white" href="/logout">Logout</a></button></div>
+  <div class="d-flex justify-content-end my-2" style="margin-left:60px;margin-right:60px;"><button class="btn btn-lg btn-danger mx-4 text-white"><a class="nav-item text-white" href="/logout/guest">Logout</a></button></div>
   </div>
   <div class="content  text-white border rounded p-4">
     <form action="/guest/completeRegistration" class="validator"  method="POST">

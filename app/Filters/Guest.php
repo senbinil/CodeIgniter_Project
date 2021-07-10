@@ -10,8 +10,9 @@ class Guest implements FilterInterface
     {
         
       
-           if(!isset($_SESSION['gid']))
+           if(session()->get('gid')===NULL)
            {
+               session()->destroy();
                return redirect()->to('/home');
            }
          //}

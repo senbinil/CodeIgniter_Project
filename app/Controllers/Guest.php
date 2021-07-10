@@ -31,7 +31,8 @@ class Guest extends Controller
                         'phone'=>$phone
                     ]))
                     $save=1;
-                    $urlhash=rawurlencode($hash);
+                    $urlhash=urlencode(urlencode(urlencode($hash)));
+                    $emailhash=urlencode($email);
                     $data_dump=$guestreg->select()->where('email',$email)->first();
                     $to = "logger@localhost";
                     $subject = "CASP User Registration";
@@ -45,11 +46,11 @@ class Guest extends Controller
                     ------------------------
                     
                     Please click this link to activate your account:
-                    http://localhost/guest/postregister/hash=$urlhash&email=$email
+                    http://localhost/guest/postregister/hash=$urlhash&email=$emailhash
                                         
                     ";
                     $headers = "From: webmaster@codeIgniter.com" ;
-                     $stat=mail($to,$subject,$txt,$headers);
+                    $stat=mail($to,$subject,$txt,$headers);
                     if(!$stat or !isset($save))   
                     echo json_encode(array('stat'=>0));
                     
@@ -78,8 +79,12 @@ class Guest extends Controller
         if(isset($hash) and isset($mail))
         {
             $gueststat=new GuestRegister();
-            $data_dump=$gueststat->select(['hash','active'])->where('email',$mail)->first();
-            $rhash=rawurldecode($hash);
+            $hmail=urldecode($mail);
+            try{
+                if(!filter_var($hmail,FILTER_SANITIZE_EMAIL))
+                return redirect()->to('/home');
+            $data_dump=$gueststat->select(['hash','active'])->where('email',$hmail)->first();
+            $rhash=urldecode(urldecode(urldecode($hash)));
             if($data_dump['hash']==$rhash && !$data_dump['active'])
             {   
                 $statupdate=['active'=>1];
@@ -89,13 +94,18 @@ class Guest extends Controller
             }
             else
             return redirect()->to('/home');
-            
+             }
+            catch(Exception $e)
+            {
+                return redirect()->to('/home');
+
+            }
 
         }
 
     }
     public function guestView($page)
-    {
+    {   $session=session();
         switch($page)
         {
             case 'fillup':echo view('guest/register_step1');
@@ -247,11 +257,14 @@ class Guest extends Controller
             else
             {
                 try
-                {
+                {   $guest_dump=new GuestModel();
+                    $guestName=$guest_dump->select(['fname','lname'])->where('GID',$user_id)->first();
                     $stat=$send_rq->save([
                         'guest_id'=>$user_id,
                         'option_1'=>$option_1,
-                        'option_2'=>$option_2
+                        'option_2'=>$option_2,
+                        'fname'=>$guestName['fname'],
+                        'lname'=>$guestName['lname']
                     ]);
                     $temp_app=$send_rq->select('application_id')->where('guest_id',$user_id)->first();
                     if($stat and $temp_app)

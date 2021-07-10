@@ -263,7 +263,7 @@ background: linear-gradient(to right, #333399, #ff00cc); /* W3C, IE 10+/ Edge, F
                           cache:false,
                           success:function(dataResult){
                             console.clear();
-
+                            console.log(dataResult);
                             var temp=JSON.parse(dataResult);
                             if(temp!==null)
                             {

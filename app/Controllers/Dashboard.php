@@ -15,6 +15,8 @@ use App\Models\GuestModel;
 use App\Models\Stcat;
 use App\Models\Subject;
 use App\Models\Syllabus;
+use App\Models\StaffSal;
+
 use Exception;
 
 class Dashboard extends Controller
@@ -58,7 +60,8 @@ class Dashboard extends Controller
                                 break;
             case 'admission_log':echo view('dashboard/admission_rq',$data);
                                 break;
-          
+            case 'salary-paye':echo view('dashboard/staff-salary');
+                                break;
             default:redirect()->to('/home');
         }
         // echo var_dump($_SESSION);
@@ -457,6 +460,68 @@ class Dashboard extends Controller
             echo 0;
         }
         
+    }
+
+
+
+    public function salaryLogger(){
+        if($this->request->getVar('empid')!==NULL and $this->request->getVar('phone')!==NULL)
+        {
+            $staffModel=new StaffEnrollment();
+            $salaryLogger=new StaffSal();
+            $amount=new Designation();
+            $empid=$this->request->getVar('empid');
+            $_SESSION['temp_emp_id']=$empid;
+            $phone=$this->request->getVar('phone');
+            try{
+                $precheck=$staffModel->select(['emp_name','desig','acc_no','bank_name','ifsc'])->where(['emp_id'=>$empid,'mobile'=>$phone])->first();
+                if($precheck===NULL)
+                 return json_encode(array('stat'=>0));
+                 $empAmt=$amount->select('salary')->where('pos_id',(int)$precheck['desig'])->first();
+                 $tempEmp=['stat'=>1,'amt'=>base64_encode($empAmt['salary']),'name'=>base64_encode($precheck['emp_name']),'acc'=>base64_encode($precheck['acc_no']),'bank_name'=>base64_encode($precheck['bank_name']),'ifsc'=>base64_encode($precheck['ifsc'])];
+                 return json_encode($tempEmp);
+                 
+
+            }
+            catch(Exception $e)
+            {
+                echo $e;
+            }
+        }
+        elseif($this->request->getVar('emp_name')!==NULL  and $this->request->getVar('ifsc')!==NULL and $this->request->getVar('amt')!==NULL and $this->request->getVar('month')!==NULL and $this->request->getVar('year')!==NULL and $this->request->getVar('acc')!==NULL)
+        {
+            echo $_SESSION['temp_emp_id'];
+            $salaryLogger=new StaffSal();
+            $prePaycheck=$salaryLogger->select()->where(['emp_id'=>$_SESSION['temp_emp_id'],'month'=>$this->request->getVar('month'),'year'=>(int)$this->request->getVar('year')])->first();
+            if($prePaycheck!==NULL)
+            {
+                session()->setFlashdata('payResult','Payment Exist');
+                return redirect()->to('/admin-home/salary-paye');
+            }
+            $data_insert=[
+                'name'=>$this->request->getVar('emp_name'),
+                'emp_id'=>$_SESSION['temp_emp_id'],
+                'month'=>$this->request->getVar('month'),
+                'year'=>(int)$this->request->getVar('year'),
+                'acc_no'=>$this->request->getVar('acc'),
+                'ifsc'=>$this->request->getVar('ifsc'),
+                'sal'=>$this->request->getVar('amt')
+            ];
+            if($salaryLogger->insert($data_insert))
+            {
+                $id=$salaryLogger->insertID();
+                session()->setFlashdata('payResult',"Payment Processed: $id");
+                 return redirect()->to('/admin-home/salary-paye');
+            }
+            else
+            {
+                session()->setFlashdata('payResult','Payment Exist');
+                redirect()->to('/admin-home/salary-paye');
+            }
+            session()->remove('temp_emp_id');
+        }
+        else
+        return redirect()->to('/home');
     }
 }
 

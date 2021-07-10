@@ -58,6 +58,8 @@ $routes->match(['get', 'post'], 'dashboard/admissionEntry', 'Dashboard::addAdmis
 $routes->match(['get', 'post'], 'dashboard/fee-collector/(:segment)', 'Dashboard::feeMod/$1',['filter'=>'auth']);
 $routes->match(['get', 'post'], 'dashboard/getReq', 'Dashboard::getAdmissionRq',['filter'=>'auth']);
 $routes->match(['get', 'post'], 'dashboard/admissionEntryControl', 'Dashboard::disableAdmissionEntry',['filter'=>'auth']);
+$routes->match(['get', 'post'], 'dashboard/staff/salary', 'Dashboard::salaryLogger',['filter'=>'auth']);
+$routes->match(['get', 'post'], 'dashboard/staff/salaryPayment', 'Dashboard::salaryLogger',['filter'=>'auth']);
 
 
 $routes->match(['get', 'post'], 'login/stafflogin', 'Login::staffLogin');
