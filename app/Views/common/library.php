@@ -205,5 +205,6 @@ function deleteMe(id)
 
     </script>
 <script src="<?=base_url()?>/asset/js/popper.min.js"></script>
+<?php session()->remove('stat');?>
 </body>
 </html>

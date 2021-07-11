@@ -43,15 +43,15 @@
     <div class="wrapper">
         <div class="row">
             <div class="col-md-3 border">
-                <h4>#Category</h4>
+                <h4>#Files</h4>
                 <hr>
-                        <select name="cat" class="form-control" id="">
+                        <!-- <select name="cat" class="form-control" id="">
                         <option value="" disabled selected >Select the category of upload</option>
                         <option value="1">Notes</option>
                         <option value="2">Syllabus</option>
                         <option value="3">Book</option>
                         <option value="4">Other</option>
-                        </select>
+                        </select> -->
                     <div class="content my-3 mx-4" style="">
                         <?php
                         if(isset($libBrowse))

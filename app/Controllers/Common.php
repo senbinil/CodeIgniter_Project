@@ -70,7 +70,7 @@ class Common extends Controller
         $file=$this->request->getFile('filetoload');
         $target_file =  basename($file->getName());
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-        if($this->request->getMethod()=='post')
+        if($this->request->getMethod()=='post' and $imageFileType==='pdf')
         {
             $hashed_file=sha1_file($file->getTempName());
             $fileintro=$this->request->getVar('fileintro');
@@ -79,6 +79,7 @@ class Common extends Controller
             if($libModel->select('fileHash')->where('fileHash',$hashed_file)->first())
             {
                 $_SESSION['stat']="File already exist";
+                session()->markAsFlashdata('stat');
                 return redirect()->to('/common/resources');
             }
             $category=array('1'=>"Note",'2'=>'Syllabus','3'=>'Book','4'=>"other");
@@ -103,6 +104,7 @@ class Common extends Controller
         {
             // echo "File is not an image.";
             $_SESSION['stat']="Select an Image File";
+            session()->markAsFlashdata('stat');
             return redirect()->to('/common/resources');
 
         }
