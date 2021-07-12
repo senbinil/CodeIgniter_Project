@@ -16,12 +16,12 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php'))
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Home');
-$routes->setDefaultMethod('index');
+$routes->setDefaultController('Pages');
+$routes->setDefaultMethod('view');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
 $routes->setAutoRoute(false);
-// $routes->get('/', 'Home::index');
+$routes->get('/', 'Pages::view/home');
 
 /**
  * --------------------------------------------------------------------
@@ -47,7 +47,7 @@ $routes->get('guest/(:segment)','Guest::guestView/$1',['filter'=>'guest']);
 $routes->get('/guest/postregister/hash=(:any)&email=(:any)','Guest::Postreg/$1/$2');
 $routes->match(['post'],'login/guest','Login::guestLogin');
 $routes->match(['post'],'/guest/completeRegistration','Guest::completeReg',['filter'=>'guest']);
-$routes->match(['post'],'/guest/csfetch','Guest::fetchCs',['filter'=>'guest']);
+$routes->match(['post'],'/guest/csfetch','Guest::fetchCs',['filter'=>'dauth']);
 $routes->match(['post'],'/guest/infofetch','Guest::fetchAdmission',['filter'=>'guest']);
 
 $routes->get('admin-home/(:segment)' , 'Dashboard::adminView/$1',['filter'=>'auth']);

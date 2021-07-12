@@ -140,6 +140,23 @@
   </div>
 </div>
 <script>
+  $(".custom-file-input").on("change", function() {
+      var fileName = $(this).val().split("\\").pop();
+      $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+    $("#cat").on("click",function(){
+        var x=$("#cat option:selected").val();
+        console.log(x);
+        if(x=="")
+        {
+            alert("Please select a category");
+            $("#sub").addClass("disabled");
+        }
+        else
+        $("#sub").removeClass("disabled");
+
+    });
+
   $(document).ready(function () {
     $('#fetch_log').on('click', function () {
       var id = $('#user_id').val();
@@ -163,6 +180,39 @@
         });
       }
     });
+  });
+  $('#sub').on('click', function () {
+    var fileIntro = $('#filedes').val();
+    var x = $("#cat option:selected").val();
+    var files = $('.custom-file-input').prop('files')[0];
+    if (fileIntro == "" || x == "" || files == "")
+      alert('Please Fill the submission form');
+    else {
+      var form_data = new FormData();
+      form_data.append('file', files);
+      form_data.append('fileIntro', fileIntro);
+      form_data.append('cat', x);
+      form_data.append('type', 501);
+      $.ajax({
+        url: '/library/useraddFile',
+        type: 'post',
+        data: form_data,
+        contentType: false,
+        processData: false,
+        cache: false,
+        success: function (data) {
+          var res = JSON.parse(data);
+          switch (res.stat) {
+            case 1: $('.fileLoad').html('<span class=" text-danger display-4">File Submitted</span>');
+              break;
+            case 0: $('.fileLoad').html('<span class=" text-danger display-4">Invalid Format</span>');
+              break;
+            case -1: $('.fileLoad').html('<span class=" text-danger display-4">File Exist</span>');
+              break;
+          }
+        }
+      });
+    }
   });
 </script>
 </body>

@@ -93,11 +93,18 @@ class Dashboard extends Controller
                     'e_mail'=>$this->request->getPost('email'),
                     'ug_course'=>$this->request->getPost('ugcourse'),
                     'prevcourse'=>$this->request->getPost('pcourse'),
-
+                    'prev_syllabus'=>$this->request->getPost('prevSyllabus'),
+                    'CSID'=>$this->request->getPost('prevcourse'),
+                    'sub1'=>$this->request->getPost('sub1'),
+                    'sub2'=>$this->request->getPost('sub2'),
+                    'sub3'=>$this->request->getPost('sub3'),
+                    'sub4'=>$this->request->getPost('sub4'),
+                    'sub5'=>$this->request->getPost('sub5'),
+                    'admit_year'=>date('Y')
             ]);
-            $no=$this->request->getPost('exroll');
-            // echo $no;
-            $data=$model->asArray()->where('exroll_no',$no)->first();
+            // $no=$this->request->getPost('exroll');
+            // // echo $no;
+            $data=array($model->insertID());
             // if($data)
             // $ses_data=[
             //     'admin_no'=>$data['admin_no']
