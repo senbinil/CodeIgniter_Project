@@ -63,7 +63,7 @@ class Login extends BaseController
         if($data)
         {
             $pass=$data['password'];
-            if($password==$pass)
+            if(\password_verify($password,$pass))
             {
                 $ses_data=[
                     'user_id' =>$data['username'],
@@ -78,7 +78,7 @@ class Login extends BaseController
             }
             else
             {
-                $session->setFlashdata('msg','Wrong Password');
+                $session->setFlashdata('msg','Wrong username or password');
                 return redirect()->to('/login/admin-login');
             }
         }
@@ -94,7 +94,7 @@ class Login extends BaseController
                 $access_id=$staffDesign->select('role_id')->where('pos_id',$id_prefetch)->first();
                 // var_dump($access_id);
                 $access=$accesstable->select('access')->where('role_id',$access_id)->first();
-                if($access['access']==2)
+                if($access['access']==2 or $access['access']==1)
                 {
                     $ses_data=[
                         'user_id' =>$data['username'],
