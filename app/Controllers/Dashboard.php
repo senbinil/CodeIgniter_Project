@@ -104,7 +104,7 @@ class Dashboard extends Controller
             ]);
             // $no=$this->request->getPost('exroll');
             // // echo $no;
-            $data=array($model->insertID());
+            $data=array('admin_no'=>$model->insertID());
             // if($data)
             // $ses_data=[
             //     'admin_no'=>$data['admin_no']
@@ -182,16 +182,16 @@ class Dashboard extends Controller
                     ->set(['remark'=>$this->request->getPost('message')])
                     ->update();
                     $session->setFlashdata('stat','<script>alert("Done");</script>');
-                    return redirect()->to('/admin-home/message-center');
+                    return redirect()->to('/common/message-center');
 
             }
             catch(Exception $e)
             {
-                return redirect()->to('/admin-home/message-center');
+                return redirect()->to('/common/message-center');
             }
         }
         else{
-            return redirect()->to('/admin-home/message-center');
+            return redirect()->to('/common/message-center');
         }
 
     }

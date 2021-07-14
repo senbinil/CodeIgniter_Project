@@ -389,39 +389,39 @@ body{
 
 <script src="<?=base_url()?>/asset/js/popper.min.js"></script>
 <script>
-    $(document).ready(function() {
+    // $(document).ready(function() {
 
-    window.history.pushState(null, "", window.location.href);        
+    // window.history.pushState(null, "", window.location.href);        
 
-    window.onpopstate = function() {
+    // window.onpopstate = function() {
 
-        window.history.pushState(null, "", window.location.href);
+    //     window.history.pushState(null, "", window.location.href);
 
-    };
-    var ctx = document.getElementById("myChart").getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-        labels: ["Allocated","Available"],
-        datasets: [{
-            backgroundColor: [
-            "#2ecc71",
-            "#3498db",
-            "#95a5a6",
-            "#9b59b6",
-            "#f1c40f",
-            "#e74c3c",
-            "#34495e"
-            ],
-            data: [1,29]
-        }]
-        },
-        options: {
-        responsive: false,
-        maintainAspectRatio: true,
-    }
-    });
-    });
+    // };
+    // var ctx = document.getElementById("myChart").getContext('2d');
+    // var myChart = new Chart(ctx, {
+    //     type: 'doughnut',
+    //     data: {
+    //     labels: ["Allocated","Available"],
+    //     datasets: [{
+    //         backgroundColor: [
+    //         "#2ecc71",
+    //         "#3498db",
+    //         "#95a5a6",
+    //         "#9b59b6",
+    //         "#f1c40f",
+    //         "#e74c3c",
+    //         "#34495e"
+    //         ],
+    //         data: [1,29]
+    //     }]
+    //     },
+    //     options: {
+    //     responsive: false,
+    //     maintainAspectRatio: true,
+    // }
+    // });
+    // });
 
     function tryMe()
     {
@@ -440,7 +440,7 @@ body{
                 var data_dump=JSON.parse(dataRes);
                 console.log(data_dump);
                 var temp=[data_dump.reqested_cs];
-                for(var i=0;i<2;i++)
+                for(var i=0;i<temp[0].length;i++)
                 {
                     if(temp[0][i].course_id==data_dump.req.option_1)
                     var option1=temp[0][i].course_name;
@@ -448,7 +448,7 @@ body{
                     var option2=temp[0][i].course_name;
                 }
 
-                console.log(option2);
+                console.log(temp);
 
                 $("#modalText").html("<div class=\"personal\">\r\n <div class=\"row\">\r\n   <label class=\"col-form-label col-md-2\">First Name:<\/label>\r\n  <label class=\"col-form-label col-md-4\">"+data_dump.fname+"<\/label>\r\n<label class=\"col-form-label col-md-2\">Last Name:<\/label>\r\n <label class=\"col-form-label col-md-4\">"+data_dump.lname+"<\/label>\r\n<\/div>\r\n<div class=\"row my-2\">\r\n<label class=\"col-form-label col-md-2\">Gender:<\/label>\r\n<label class=\"col-form-label col-md-4\">"+data_dump.gender+"<\/label>\r\n<label class=\"col-form-label col-md-2\">DOB:<\/label>\r\n<label class=\"col-form-label col-md-4\">"+data_dump.dob+"<\/label>\r\n<\/div>\r\n <div class=\"row my-2\">\r\n <label class=\"col-form-label col-md-2\">Blood:<\/label>\r\n<label class=\"col-form-label col-md-4\">"+data_dump.blood_group+"<\/label>\r\n<label class=\"col-form-label col-md-2\">Address:<\/label>\r\n<label class=\"col-form-label col-md-4\">"+data_dump.address+"<\/label>\r\n <\/div>\r\n<div class=\"row my-2\">\r\n<label class=\"col-form-label col-md-2\">State:<\/label>\r\n  <label class=\"col-form-label col-md-4\">"+data_dump.state+"<\/label>\r\n<label class=\"col-form-label col-md-2\">City:<\/label>\r\n<label class=\"col-form-label col-md-4\">"+data_dump.city+"<\/label>\r\n  <\/div>\r\n <div class=\"row my-2\">\r\n<label class=\"col-form-label col-md-2\">Pincode:<\/label>\r\n<label class=\"col-form-label col-md-4\">"+data_dump.pincode+"<\/label>\r\n <label class=\"col-form-label col-md-2\">Guardian Name:<\/label>\r\n                    <label class=\"col-form-label col-md-4\">"+data_dump.gfname+"  "+data_dump.glname+"<\/label>\r\n<\/div>\r\n <div class=\"row my-2\">\r\n <label class=\"col-form-label col-md-2\">Phone:<\/label>\r\n<label class=\"col-form-label col-md-4\">"+data_dump.phone+"<\/label>\r\n<label class=\"col-form-label col-md-2\">Email:<\/label>\r\n<label class=\"col-form-label col-md-4\">"+data_dump.email+"<\/label>\r\n<\/div>\r\n<\/div>\r\n<div class=\"acadamic\">\r\n<h4 class=\"text-center my-2\">Academic Details<\/h4>\r\n<hr>\r\n<div class=\"row my-2\">\r\n<label class=\"col-form-label col-md-2\">Year Of Pass:<\/label>\r\n<label class=\"col-form-label col-md-4\">"+data_dump.year_pass+"<\/label>\r\n<label class=\"col-form-label col-md-2\">Pervious Stream:<\/label>\r\n <label class=\"col-form-label col-md-4\">"+data_dump.prev_stream.category+"<\/label>\r\n <\/div>\r\n<div class=\"row my-2\">\r\n<label class=\"col-form-label col-md-2\">Syllabus:<\/label>\r\n <label class=\"col-form-label col-md-4\">"+data_dump.syllabus.Name+"<\/label>\r\n<label class=\"col-form-label col-md-2\">Previous Course:<\/label>\r\n<label class=\"col-form-label col-md-4\">"+data_dump.prev_sub.name+"<\/label>\r\n<\/div>\r\n<hr class=\"py-3\">\r\n<div class=\"d-flex justify-content-center row\">\r\n<div class=\"table-responsive col-md-6 \">\r\n<table class=\"table table-sm table-borderless table-dark\">\r\n<thead>\r\n<th scope=\"col\">#<\/th>\r\n<th scope=\"col\">Mark<\/th>\r\n<\/thead>\r\n<tbody class=\"bg-light text-dark\">\r\n<tr>\r\n<td>"+data_dump.prev_sub.sub1+"<\/td>\r\n<td>"+data_dump.sub1+"<\/td>\r\n<\/tr>\r\n<tr>\r\n<td>"+data_dump.prev_sub.sub2+"<\/td>\r\n<td>"+data_dump.sub2+"<\/td>\r\n<\/tr>\r\n<tr>\r\n<td>"+data_dump.prev_sub.sub3+"<\/td>\r\n<td>"+data_dump.sub3+"<\/td>\r\n<\/tr>\r\n<tr>\r\n<td>"+data_dump.prev_sub.sub4+"<\/td>\r\n<td>"+data_dump.sub4+"<\/td>\r\n<\/tr>\r\n<tr>\r\n<td>"+data_dump.prev_sub.sub5+"<\/td>\r\n<td>"+data_dump.sub5+"<\/td>\r\n<\/tr>\r\n<\/tbody>\r\n<\/table>\r\n<\/div>\r\n<\/div>\r\n<\/div>\r\n<hr class=\"my-3\">\r\n<div class=\"options\">\r\n<h4 class=\"text-center my-2\">Options Selected<\/h4>\r\n<div class=\"row bg-dark text-light my-2  text-center mx-3\">\r\n<label class=\"col-form-label col-md-1\">Order<\/label>\r\n<label class=\"col-form-label col-md-6\">Course<\/label>\r\n<label class=\"col-form-label col-md-5\">Action<\/label>\r\n<\/div>\r\n<div class=\"row  my-2  text-center  border mx-3\">\r\n<label class=\"col-form-label col-md-1\">1<\/label>\r\n<label class=\"col-form-label col-md-6\">"+option1+"<\/label>\r\n<label class=\"col-form-label col-md-5\"><button onclick=\"admit("+c+","+data_dump.req.option_1+")\" class=\"btn btn-primary  btn-sm mx-1\" value=\""+data_dump.req.option_1+"\">Approve<\/button><\/label>\r\n<\/div>\r\n<div class=\"row border my-2  text-center mx-3\">\r\n<label class=\"col-form-label col-md-1\">2<\/label>\r\n<label class=\"col-form-label col-md-6\">"+option2+"<\/label>\r\n<label class=\"col-form-label col-md-5\"><button class=\"btn btn-primary btn-sm mx-1\"  onclick=\"admit("+c+","+data_dump.req.option_2+")\" value=\""+data_dump.req.option_2+"\">Approve<\/button><\/label>\r\n<\/div>\r\n<\/div>\r\n\r\n\r\n\r\n<hr>\r\n<div class=\"mark\">\r\n<div class=\"row mx-3\">\r\n<label class=\"col-form-label col-md-3\">Date Of Submission:<\/label>\r\n<label class=\"col-form-label col-md-6\">"+data_dump.req.timelog+"<\/label>\r\n    <\/div>\r\n     <\/div>");
             }

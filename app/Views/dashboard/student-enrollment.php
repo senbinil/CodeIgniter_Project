@@ -150,7 +150,7 @@
         </div>
         <label for="" class="col-form-label col-sm-3">Zip Code</label>
         <div class="col-sm-3">
-          <input type="text" name="pincode" class="form-control" required minlength="6" maxlength="6"
+          <input type="text" name="pincode" class="form-control" required minlength="6" maxlength="6" onkeypress="return onlyNumberKey(event)"
             autocomplete="off">
         </div>
       </div>
@@ -365,10 +365,10 @@
     <label for="" class="col-form-label  col-sm-3">UG Course</label>
     <div class="col-sm-3 ">
       <select name="ugcourse" class="form-control" required>
-        <option value="2021" selected>Bsc Computer Science</option>
-        <option value="2023">Bachelor of Commerce</option>
-        <option value="2024">Bachelor of Arts</option>
-        <option value="2022">Bachelor Of Computer Application</option>
+        <option value="30" selected>Bsc Computer Science</option>
+        <option value="22">Bachelor of Commerce</option>
+        <option value="66">Bachelor of Arts English</option>
+        <option value="44">Bachelor Of Computer Application</option>
       </select>
     </div>
     <label for="" class="col-form-label  col-sm-3">Email ID</label>

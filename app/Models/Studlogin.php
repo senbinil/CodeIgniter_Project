@@ -4,7 +4,7 @@ use CodeIgniter\Model;
 class Studlogin extends Model
 {
     protected $table='student_log';
-    protected $allowedFields=['stud_id','pass'];
+    protected $allowedFields=['student_id','pass','email'];
 }
 
 ?>

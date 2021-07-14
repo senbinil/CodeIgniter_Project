@@ -167,7 +167,7 @@ $(document).ready(function(){
                 cache:false,
                 success:function(result){
                     var data=JSON.parse(result);
-                    console.log(data['sem']);
+                    console.log(data);
                     $('#course').val(data['course']['course_name']);
                     $('#semester').val(data['sem']);
                     $('#mobile').val(data['phone']);

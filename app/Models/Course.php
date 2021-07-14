@@ -4,6 +4,6 @@ use CodeIgniter\Model;
 
 class Course extends Model{
     protected $table='ugcourse';
-    protected $allowedFields=['course_id','course_name','sem_fee'];
+    protected $allowedFields=['course_id','course_name','depart_id','sem_fee'];
 }
 ?>

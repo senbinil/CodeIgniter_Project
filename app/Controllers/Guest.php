@@ -187,6 +187,7 @@ class Guest extends Controller
             ]))
             {
             //    afer completion
+                $_SESSION['filled']=1;
                 return redirect()->to('/guest/profile');
             }
             else

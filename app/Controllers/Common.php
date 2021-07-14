@@ -64,6 +64,35 @@ class Common extends Controller
         }
     }
 
+    public function notify(){
+        // if($this->request->getVar('type')==100 and )
+        $NotifyModel=new HomeModel();
+        if($this->request->getVar('cat')!==NULL and $this->request->getVar('cat')!==0 and $this->request->getVar('content')!==NULL)
+        {
+            if($NotifyModel->insert([
+                'msg_cat'=>$this->request->getVar('cat'),
+                'msg'=>$this->request->getVar('content')
+            ]))
+            {
+                session()->set('stat',1);
+                session()->markAsFlashdata('stat');
+                return redirect()->to('/common/notification');
+            }
+
+        }
+        elseif ($this->request->getVar('type')==100 and $this->request->getVar('id')!==NULL) {
+            # code...
+            if($NotifyModel->select()->where('msg_id',(int)$this->request->getVar('id'))->first())
+            {   $NotifyModel->where('msg_id',(int)$this->request->getVar('id'))->delete();
+                echo \json_encode(array('stat'=>1));
+            }
+            else
+            {
+                echo \json_encode(array('stat'=>0));
+
+            }
+        }
+    }
     
     public function addFile()
     {

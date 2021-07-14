@@ -45,7 +45,7 @@ class PassRecovery extends Controller
             else
             echo json_encode(array("statusCode"=>201));
         }
-        elseif(true)
+        elseif($this->request->getMethod()=='post' and $this->request->getVar('pass')!==NULL and $this->request->getVar('type')==2)
         {
             $pass=$this->request->getPost('pass');
             $hash_pass=password_hash($pass,PASSWORD_DEFAULT);
@@ -77,7 +77,8 @@ class PassRecovery extends Controller
     }
 
     public function studentchk()
-    {   $session=session();
+    {   
+        $session=session();
         $student_log=new Studlogin();
         $student_dump=new Enrollment();
         if($this->request->getPost('type')==1)
@@ -85,19 +86,22 @@ class PassRecovery extends Controller
             $id =$this->request->getPost('id');
             $mobile=$this->request->getPost('phone');
             $stat=$student_dump->select(['admin_no','e_mail'])->where('admin_no',$id,'gphone',$mobile)->first();
-            $sesdata=[
-                'id'=>$id,
-                'stat'=>$stat['e_mail']
-            ];
-            $session->set($sesdata);
             if($stat!=NULL)
-            echo json_encode(array("statusCode"=>200,"val"=>$stat));
+            {
+                $sesdata=[
+                    'id'=>$id,
+                    'stat'=>$stat['e_mail']
+                ];
+                $session->set($sesdata);
+                echo json_encode(array("statusCode"=>200,"val"=>$stat));
+            }
             else
             echo json_encode(array("statusCode"=>201));
         }
 
-        elseif(true)
+        elseif($this->request->getMethod()=='post' and $this->request->getVar('pass')!==NULL and $this->request->getVar('type')==2)
         {
+            $session=session();
             $pass=$this->request->getPost('pass');
             $hash_pass=password_hash($pass,PASSWORD_DEFAULT);
             if($student_dump->select('admin_no')->where('admin_no',$_SESSION['id'])->first())
@@ -105,27 +109,31 @@ class PassRecovery extends Controller
                 $data=[
                     'password'=>$hash_pass
                 ];
-                $passstat=$student_log->where('student_id',$_SESSION['id'])->set(['pass'=>$data])->update();
-                if($passstat)
-                echo json_encode(array("statusCode"=>1));
-            }
-            else
-            {
-                $data=[
-                    'student_id'=>$_SESSION['id'],
-                    'pass'=>$hash_pass,
-                    'email'=>$_SESSION['stat']
-                ];
-                $passstat=$student_log->insert($data);
-                if($passstat)
-                echo json_encode(array("statusCode"=>1));
-
-            }
+                if($student_log->select('student_id')->where('student_id',$_SESSION['id'])->first())
+                {
+                    $passstat=$student_log->where('student_id',$_SESSION['id'])->set(['pass'=>$data])->update();
+                    echo json_encode(array("statusCode"=>1));
+                }
+                else
+                {
+                
+                    $student_log->insert([
+                        'student_id'=>(int)$session->get('id'),
+                        'pass'=>$hash_pass,
+                        'email'=>$session->get('stat')
+                    ]);
+                    $passstat=$student_log->insertID();
+                    if($passstat)
+                    echo json_encode(array("statusCode"=>1));
+                }
+             }
+             else
+             redirect()->to('/precovery/student-recovery');
         }
         else
         redirect()->to('/precovery/student-recovery');
+    }   
 
-    }
 
  }
 

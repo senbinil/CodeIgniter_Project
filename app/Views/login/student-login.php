@@ -56,7 +56,7 @@
               </div>
               <div class="row d-flex justify-content-end">
                 <div class="recover">
-                  <a href="#" class="nav-link">Recover Password</a>
+                  <a href="/precovery/student-recovery" class="nav-link">Recover Password</a>
                 </div>
               </div>
               <br>

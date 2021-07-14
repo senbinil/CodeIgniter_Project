@@ -76,6 +76,7 @@ $routes->get('/common/(:segment)','Common::Pagger/$1',['filter'=>'common']);
 $routes->get('/common/resources/library','Common::Pagger/browseLib',['filter'=>'dauth']);
 $routes->match(['get','post'],'/library/useraddFile','Common::UseraddFile',['filter'=>'dauth']);
 $routes->match(['get','post'],'/library/fileApprove','Common::tempFile',['filter'=>'common']);
+$routes->match(['get', 'post'], 'dashboard/notify', 'Common::notify',['filter'=>'common']);
 
 $routes->get('faculty/(:segment)','Faculty::Pagger/$1',['filter'=>'fauth']);
 $routes->match(['get', 'post'], 'user/log_fetch', 'Login::getLog',['filter'=>'dauth']);

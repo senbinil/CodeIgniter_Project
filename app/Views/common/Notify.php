@@ -71,6 +71,9 @@
     <br>
     <!--content inside-->
     <div class="container-fluid main">
+        <div class="alert alert-danger d-flex justify-content-center ">
+            <?php if(session()->get('stat')!==NULL and session()->get('stat'))echo 'Request Processed'; ?>
+        </div>
         <div class="row">
             <div class="col-sm-6">
                 <h3>Bulletin toolbox:</h3><br>
@@ -85,22 +88,22 @@
                 </form>
                 <hr>
                 <small>New  Message:</small><br><br>
-                <form action="#" method="POST" class="form-group">
+                <form action="/dashboard/notify" method="POST" class="form-group">
                     <div class="row">
                       <div class="col-sm-12">
                         <select name="cat" class="form-control" id="">
-                            <option value="init" selected disabled>Select the category of message</option>
-                            <option value="result">Result</option>
-                            <option value="notice">Notification</option>
-                            <option value="event">Event</option>
+                            <option value="0" selected disabled>Select the category of message</option>
+                            <option value="Result">Result</option>
+                            <option value="Notice">Notification</option>
+                            <option value="Event">Event</option>
 
                         </select>
                     </div>
                       <div class="col-sm-12 my-4">
-                        <textarea name="content" id="" cols="60"placeholder="Enter the Message" class="form-control" rows="6"></textarea>
+                        <textarea name="content" name="message" cols="60"placeholder="Enter the Message" class="form-control" rows="6"></textarea>
                     </div>
                     </div>
-                   <center> <input type="submit" class="btn btn-danger" value="UPDATE"><input type="reset" class=" mx-3 my-2 btn btn-info" value="Reset"></center>
+                   <center> <input type="submit" class="btn btn-danger" value="Submit"><input type="reset" class=" mx-3 my-2 btn btn-info" value="Reset"></center>
                   </form>
             </div>
             <div class="col-sm-6">
@@ -125,15 +128,24 @@ $(document).ready(function(){
         if(!msg_id=='')
         {
             $.ajax({
-                url:'',
+                url:'/dashboard/notify',
                 type:'POST',
                 data:{
                     id:msg_id,
-                    type:1
+                    type:100
                 },
                 cache:false,
                 success:function(result){
-                    console.log(result);
+                    var res=JSON.parse(result);
+                    if(res.stat)
+                    {
+                        alert('Deleted');
+                        window.location.replace("/common/notification");
+
+                    }
+                    
+                    else
+                    alert('Invalid Message ID');
                 }
             });
         }

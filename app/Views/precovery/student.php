@@ -23,7 +23,10 @@
      a{
        color:white !important;
      }
-     
+     /* .step2{
+       display:none;
+     }
+      */
     
 
     </style>
@@ -230,11 +233,10 @@ Why  i am on this page ?</h5><br>
 
       }
       $(document).ready(function(){
+        $('.step2').hide();
         $('#userchk').on('click',function(){
           var id=$('#admin_no').val();
           var phone=$('#phone').val();
-          // console.log(id);
-          // console.log(phone);
           if(id!=="" && phone!=="")
           {
             // $('#userchk').attr("disabled","disabled");
@@ -254,12 +256,12 @@ Why  i am on this page ?</h5><br>
                 {
 
                   $('#step1').html('<p class="text-center text-danger"> User Found Please Proceed </p>');
+                  $('.step2').show();
                 }
                 else if(dataResult.statusCode==201)
-                {  alert("User  Found!");
-
+                {  alert("User not Found!");
+                 
                   $('#userchk').removeAttr("disabled");
-                  alert("User Not Found!");
                 }
                 
               }
